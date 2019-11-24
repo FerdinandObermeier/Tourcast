@@ -1,1 +1,26 @@
-<p>filter works!</p>
+<div class="filter-wrapper">
+    <div class="inner-wrapper">
+        <div class="pointer"></div>
+        <div class="pointer-inner"></div>
+        <div class="filter-element" [ngClass]="{'active': showAttractions}" (click)="showAttractions=!showAttractions">
+            <mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
+            Attractions
+        </div>
+        <div class="filter-element" [ngClass]="{'active': showLakes}" (click)="showLakes=!showLakes">
+            <mat-icon aria-hidden="false" aria-label="Lakes">directions_boat</mat-icon>
+            Lakes
+        </div>
+        <div class="filter-element" [ngClass]="{'active': showMountains}" (click)="showMountains=!showMountains">
+            <mat-icon aria-hidden="false" aria-label="Mountains">landscape</mat-icon>
+            Mountains
+        </div>
+        <div class="filter-element" [ngClass]="{'active': showMuseums}" (click)="showMuseums=!showMuseums">
+            <mat-icon aria-hidden="false" aria-label="Museums">museum</mat-icon>
+            Museums
+        </div>
+        <div class="filter-element" [ngClass]="{'active': showViewpoints}" (click)="showViewpoints=!showViewpoints" style="border-bottom: none;">
+            <mat-icon aria-hidden="false" aria-label="Viewpoints">panorama</mat-icon>
+            Viewpoints
+        </div>
+    </div>
+</div>

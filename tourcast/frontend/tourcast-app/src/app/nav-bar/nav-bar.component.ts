@@ -7,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  sunny = true;
+  cloudy = false;
+  showFilter = false;
+
   constructor() { }
 
-  sunny:boolean=true;
-  cloudy:boolean=false;
   ngOnInit() {
   }
 

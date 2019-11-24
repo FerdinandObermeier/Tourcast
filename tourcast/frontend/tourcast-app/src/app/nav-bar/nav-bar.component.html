@@ -8,7 +8,8 @@
         </span>
     </div>
     <div class="filter">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">filter_list
+        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="showFilter=!showFilter">filter_list
         </mat-icon>
     </div>
 </div>
+<app-filter *ngIf="showFilter"></app-filter>
