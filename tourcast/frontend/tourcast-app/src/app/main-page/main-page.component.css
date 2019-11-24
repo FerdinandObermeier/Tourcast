@@ -1,0 +1,27 @@
+.header {
+    background: #741b47ff;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: large;
+}
+
+.days {
+    background: hotpink;
+}
+
+.content {
+    background: grey;
+    height: 100%;
+}
+
+.page {
+    height: 100%;
+}
+
+.day {
+}
+
+.filter-icon {
+    align-content: right;
+}
