@@ -1,27 +1,50 @@
 .header {
     background: #741b47ff;
     color: white;
-    text-align: center;
-    padding: 0.5rem;
-    font-size: large;
+    height: 1rem;
 }
 
-.days {
+.swiper {
     background: hotpink;
 }
 
 .content {
+    flex-grow: 1;
     background: grey;
-    height: 100%;
 }
 
 .page {
+    display: flex;
+    flex-flow: column;
     height: 100%;
-}
-
-.day {
+    background: chartreuse;
 }
 
 .filter-icon {
-    align-content: right;
+    float: right;
 }
+
+/* Swiper */
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
