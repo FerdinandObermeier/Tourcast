@@ -8,6 +8,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 import { FilterComponent } from './filter/filter.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
     NavBarComponent,
     MainPageComponent,
     DetailViewComponent,
-    FilterComponent
+    FilterComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

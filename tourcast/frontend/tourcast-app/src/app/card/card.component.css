@@ -1,0 +1,38 @@
+.card {
+  height: 150px;
+  width: 80%;
+  margin: auto;
+  background: url("../../assets/images/frauenkirche.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  position: relative;
+  top: 70px;
+}
+
+.overlay {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  background-color: transparent;
+  color: #0a2239;
+  display: grid;
+  grid-template-columns: 1fr 45px;
+  font-weight: bold; 
+}
+
+.title {
+  padding: 10px;
+}
+
+.icon {
+  margin-top: 10px;
+  margin-right: 22px;
+  border: #0a2239 1px solid;
+  padding-right: 28px;
+  padding-left: 4px;
+  padding-top: 4px;
+  border-radius: 50%;
+  background-color: white;
+  color: #0a2239;
+}
