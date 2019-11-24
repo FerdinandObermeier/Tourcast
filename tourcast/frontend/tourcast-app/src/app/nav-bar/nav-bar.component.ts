@@ -9,6 +9,8 @@ export class NavBarComponent implements OnInit {
 
   constructor() { }
 
+  sunny:boolean=true;
+  cloudy:boolean=false;
   ngOnInit() {
   }
 
