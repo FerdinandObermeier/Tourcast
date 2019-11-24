@@ -7,6 +7,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 import { FilterComponent } from './filter/filter.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 @NgModule({
   declarations: [
@@ -14,10 +16,12 @@ import { FilterComponent } from './filter/filter.component';
     NavBarComponent,
     MainPageComponent,
     DetailViewComponent,
-    FilterComponent
+    FilterComponent,
   ],
   imports: [
+    MatButtonModule,
     BrowserModule,
+    MatTabsModule,
     BrowserAnimationsModule
   ],
   providers: [],

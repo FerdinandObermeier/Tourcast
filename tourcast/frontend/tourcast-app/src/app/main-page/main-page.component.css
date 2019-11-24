@@ -1,23 +1,32 @@
 .header {
-    background: #741b47ff;
-    color: white;
     height: 1rem;
-}
-
-.swiper {
-    background: hotpink;
 }
 
 .content {
     flex-grow: 1;
-    background: grey;
-}
+ }
 
 .page {
     display: flex;
     flex-flow: column;
     height: 100%;
-    background: chartreuse;
+ }
+
+.days {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.myButtonActive {
+    color: white;
+    background-color: blue;
+    margin: 0.3rem;
+}
+
+.myButtonInactive {
+    color: white;
+    background-color: #494949;
+    margin: 0.3rem;
 }
 
 .filter-icon {
