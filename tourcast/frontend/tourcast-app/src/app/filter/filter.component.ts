@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
+  showAttractions = false;
+  showLakes = false;
+  showMountains = false;
+  showMuseums = false;
+  showViewpoints = false;
+
   constructor() { }
 
   ngOnInit() {

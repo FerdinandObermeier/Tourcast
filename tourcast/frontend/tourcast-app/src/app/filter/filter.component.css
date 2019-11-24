@@ -1,0 +1,50 @@
+.filter-wrapper{
+    border: 2px solid #0a2239;
+    width: 200px;
+    position: absolute;
+    top: 55px;
+    right:5px;
+    color: #0a2239;
+    padding: 1px;
+}
+
+.inner-wrapper{
+    position: relative;
+}
+
+.pointer{
+    position: absolute;
+    top: -12px;
+    right: 17px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #0a2239;
+}
+
+.pointer-inner{
+    position: absolute;
+    top: -9px;
+    right: 18px;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid white;
+}
+
+.filter-element{
+    border-bottom: 1px solid transparent;
+    padding: 10px;
+}
+
+.filter-element mat-icon{
+    vertical-align: bottom;
+}
+
+.active{
+    background-color: #0a2239;
+    color: white;
+    border-color: white;
+}
