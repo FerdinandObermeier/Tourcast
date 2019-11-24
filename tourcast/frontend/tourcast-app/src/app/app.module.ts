@@ -9,6 +9,7 @@ import { DetailViewComponent } from './detail-view/detail-view.component';
 import { FilterComponent } from './filter/filter.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './card/card.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CardComponent } from './card/card.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
