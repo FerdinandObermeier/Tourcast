@@ -11,16 +11,9 @@ export class MainPageComponent implements AfterViewInit {
 
   constructor() { }
 
-  // this.mySwiper = new Swiper('.swiper-container', {
-  //       pagination: {
-  //         el: '.swiper-pagination',
-  //         dynamicBullets: true,
-  //       },
-  //     });
+  ngAfterViewInit() {
+    this.mySwiper = new Swiper('.swiper-container', {});
+  }
 
-      ngAfterViewInit() {
-        this.mySwiper = new Swiper('.swiper-container', {});
-      }
-  
 
 }
