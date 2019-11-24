@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import 'swiper';
 
 @Component({
   selector: 'app-main-page',
@@ -11,9 +12,11 @@ export class MainPageComponent implements AfterViewInit {
 
   constructor() { }
 
-  ngAfterViewInit() {
-    this.mySwiper = new Swiper('.swiper-container', {});
-  }
+    ngAfterViewInit() {
+      this.mySwiper = new Swiper('.swiper-container', {
+        paginationClickable: true,
+      });
+    }
 
 
 }
