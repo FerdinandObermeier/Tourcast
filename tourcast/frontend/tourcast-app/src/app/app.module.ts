@@ -35,7 +35,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
     BrowserAnimationsModule,
     SwiperModule
   ],
