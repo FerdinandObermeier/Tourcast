@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
+  showDetails: boolean = false;
+
   constructor() { }
 
   local_activity:boolean=true;
@@ -18,4 +20,7 @@ export class CardComponent implements OnInit {
   ngOnInit() {
   }
 
+  onCloseDetails(showDetails: boolean) {
+    this.showDetails = showDetails;
+  }
 }

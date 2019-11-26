@@ -1,1 +1,48 @@
-<p>detail-view works!</p>
+<div class="detail-card">
+    <div class="card-wrapper">
+        <div class="icon" (click)="onClose()">
+            <mat-icon aria-hidden="false" aria-label="Attractions">close</mat-icon>
+        </div>
+        <div class="image-container">       
+            <img src="../../assets/images/neuschwanstein.jpeg" alt="">
+        </div>
+        <div class="text-container">
+            <div class="title">
+                <b>Schloss Neuschwanstein</b>
+            </div>
+            <hr>
+            <div class="info">
+                <div class="info-item">
+                    <div>
+                        <mat-icon aria-hidden="false" aria-label="Attractions">money</mat-icon> 
+                    </div>
+                    <div>
+                        30 - 50 €
+                    </div>
+                </div>
+                <div class="info-item" (click)="onOpenLink('https://www.google.com/maps/search/?api=1&query=Schloss+Neuschwanstein')">
+                    <div>
+                        <mat-icon aria-hidden="false" aria-label="Attractions">directions</mat-icon>
+                    </div>
+                    <div>
+                        Google Maps
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div>
+                        <mat-icon aria-hidden="false" aria-label="Attractions">access_time</mat-icon>
+                    </div>
+                    <div>
+                        10:00 - 20:00 
+                    </div>
+                </div>
+            </div>
+            <div class="description">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+            </div>
+            <div class="buttons">      
+                <button mat-raised-button color="primary">I will go there!</button>
+            </div>
+        </div>
+    </div>
+</div>
