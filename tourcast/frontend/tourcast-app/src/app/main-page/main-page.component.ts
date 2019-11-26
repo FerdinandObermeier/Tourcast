@@ -60,5 +60,6 @@ export class MainPageComponent implements AfterViewInit {
 
   goToSlideNumber(slide: number){
     this.index = slide;
+    this.onIndexChange(slide);
   }
 }
