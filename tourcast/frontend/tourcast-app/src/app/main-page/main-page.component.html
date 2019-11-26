@@ -1,1 +1,34 @@
-<p>main-page works!</p>
+<div class="page">
+    <div class="days">
+        <button mat-flat-button (click)="goToSlideNumber(0)"
+        [ngClass]="{'myButtonActive': currentSlide == 0, 'myButtonInactive': currentSlide != 0 }">Today</button>
+        <button mat-flat-button (click)="goToSlideNumber(1)"
+        [ngClass]="{'myButtonActive': currentSlide == 1, 'myButtonInactive': currentSlide != 1 }">Tomorrow</button>
+        <button mat-flat-button (click)="goToSlideNumber(2)"
+        [ngClass]="{'myButtonActive': currentSlide == 2, 'myButtonInactive': currentSlide != 2 }"> {{ uebermorgen }}</button>
+    </div>
+    <hr style="width: 100%; color: lightgray; margin-top: 0rem;">
+    <div class="content-container">
+        <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
+          <div class="swiper-slide">
+            <div>
+              <app-card></app-card>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div>
+              Morgen
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div>
+              getUebermorgen
+            </div>
+          </div>
+        </swiper>
+      </div>
+
+
+
+</div>
+
