@@ -4,7 +4,7 @@
     height: calc(100% - 80px);
     background-color: white;
     position: absolute;
-    top: 55px;
+    top: 0;
     left: 0;
     z-index: 5;
     box-shadow: 0 0 10px 0 #888;
@@ -19,7 +19,6 @@
       transform: scale(1);
     }
 }
-
 
 .card-wrapper{
     position: relative;
