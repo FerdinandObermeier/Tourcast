@@ -9,7 +9,8 @@ import { DetailViewComponent } from './detail-view/detail-view.component';
 import { FilterComponent } from './filter/filter.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './card/card.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule, MatButton } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatCardModule} from '@angular/material/card';
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilterComponent implements OnInit {
 
-  showAttractions = false;
-  showLakes = false;
-  showMountains = false;
-  showMuseums = false;
-  showViewpoints = false;
+  showAttractions = true;
+  showLakes = true;
+  showMountains = true;
+  showMuseums = true;
+  showViewpoints = true;
 
   constructor() { }
 
