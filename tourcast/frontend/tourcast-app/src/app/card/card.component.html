@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="showDetails = true">
   <div class="image-container">
     <img src="../../assets/images/neuschwanstein.jpeg" alt="">
   </div>
@@ -25,3 +25,4 @@
     <mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
   </div>
 </div>
+<app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)"></app-detail-view>
