@@ -1,9 +1,10 @@
-<div class="card">
+<div class="card" (click)="showDetails = true">
   <div class="image-container">
     <img src="../../assets/images/neuschwanstein.jpeg" alt="">
   </div>
   <div class="text-container">
-      <h3>Schloss Neuschwanstein</h3>
+      <div class="title">Schloss Neuschwanstein</div>
+      <div class="subtitle">Attraction</div>
       <div class="crowdedness">
           <mat-icon aria-hidden="false" aria-label="Attractions">group</mat-icon>
           <div class="crowdedness-bar">
@@ -12,9 +13,16 @@
             </div>
           </div>
       </div>
-      <div class="rating"></div>
+      <div class="rating">
+            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+      </div>
   </div>
   <div class="icon">
     <mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
   </div>
 </div>
+<app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)"></app-detail-view>

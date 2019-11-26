@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-detail-view',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailViewComponent implements OnInit {
 
+  @Output() onCloseDetails = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onClose() {
+    this.onCloseDetails.emit(false);
+  }
+
+  onOpenLink(link: string) {
+    window.open(link);
+  }
 }

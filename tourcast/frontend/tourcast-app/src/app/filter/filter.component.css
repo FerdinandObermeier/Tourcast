@@ -1,13 +1,13 @@
 .filter-wrapper{
-    border: 2px solid #0a2239;
+    border: 2px solid #a64d79;
     width: 200px;
     position: fixed;
     top: 55px;
     right:5px;
-    color: #0a2239;
+    color: #a64d79;
     padding: 1px;
     z-index: 1000;
-    background-color: white;
+    background-color: #EDDBE4;
 }
 
 .inner-wrapper{
@@ -22,7 +22,7 @@
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #0a2239;
+    border-bottom: 10px solid #a64d79;
 }
 
 .pointer-inner{
@@ -33,7 +33,7 @@
     height: 0;
     border-left: 9px solid transparent;
     border-right: 9px solid transparent;
-    border-bottom: 9px solid white;
+    border-bottom: 9px solid #EDDBE4;
 }
 
 .filter-element{
@@ -46,7 +46,7 @@
 }
 
 .active{
-    background-color: #0a2239;
+    background-color: #a64d79;
     color: white;
     border-color: white;
 }
