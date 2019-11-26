@@ -11,10 +11,9 @@
     padding:10px;
     text-align: center;
     font-size: 28px;
-    
-
-
+    z-index: 1000;
 }
+
 .navbar span{
     font-size: 20px;;
 }

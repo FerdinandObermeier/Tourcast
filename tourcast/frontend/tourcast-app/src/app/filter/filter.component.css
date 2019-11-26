@@ -1,11 +1,13 @@
 .filter-wrapper{
     border: 2px solid #0a2239;
     width: 200px;
-    position: absolute;
+    position: fixed;
     top: 55px;
     right:5px;
     color: #0a2239;
     padding: 1px;
+    z-index: 1000;
+    background-color: white;
 }
 
 .inner-wrapper{

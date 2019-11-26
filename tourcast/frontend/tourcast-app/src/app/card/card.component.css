@@ -1,57 +1,74 @@
-
-
-.card {
-  position: relative;
-  top:70px;
-  background-color: white;
-  width: 90%;
-  margin:auto;
-}
-.mat-card{
-  background-color: white;
-  color:black;
+.card{
+  width: 50%;
+  height: 300px;
+  box-shadow: 0 0 6px 0 #d7d7d7;
+  margin: 10px 10px 10px 0;
+  position:relative;
+  display: inline-block;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-
-/*.card {
+.image-container{
   height: 150px;
-  width: 80%;
-  margin: auto;
-  background: url("../../assets/images/frauenkirche.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: block;
-  position: relative;
-  top: 70px;
-}
-
-.overlay {
-  position: relative;
   width: 100%;
-  margin: auto;
-  background-color: transparent;
-  color: #0a2239;
-  display: grid;
-  grid-template-columns: 1fr 45px;
-  font-weight: bold; 
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.title {
+img{
+  height: 150px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.text-container{
+  position: absolute;
+  top: 150px;
+  left: 0;
+  height: 150px;
+  width: 200px;
+  padding: 0 10px;
+}
+
+.title{
+  color:black;
+  position:absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
   padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
-.icon {
-  margin-top: 10px;
-  margin-right: 22px;
-  border: #0a2239 1px solid;
-  padding-right: 28px;
-  padding-left: 4px;
-  padding-top: 4px;
-  border-radius: 50%;
-  background-color: white;
-  color: #0a2239;
-}*/
+.crowdedness{
+}
+
+.crowdedness-bar{
+  display: inline-block;
+  margin: 0 5px;
+  position:relative;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  height: 20px;
+  width: 70%;
+}
+
+.crowdedness-bar-inner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 50%;
+  background-color: orange;
+}
+
+.icon{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 5;
+  color: white;
+}
