@@ -13,7 +13,7 @@ export class MainPageComponent implements AfterViewInit {
   index = 0;
   private today = new Date();
   private currentDay;
-  private uebermorgen;
+  uebermorgen;
   private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   
   constructor() {
