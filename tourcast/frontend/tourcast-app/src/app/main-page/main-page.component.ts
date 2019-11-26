@@ -10,6 +10,7 @@ export class MainPageComponent implements AfterViewInit {
 
   currentSlide: number = 0;
   public disabled: boolean = false;
+  index = 0;
 
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
@@ -18,7 +19,7 @@ export class MainPageComponent implements AfterViewInit {
     mousewheel: true,
     scrollbar: false,
     navigation: false,
-    pagination: false
+    pagination: false,
   };
 
   private scrollbar: SwiperScrollbarInterface = {
@@ -55,7 +56,9 @@ export class MainPageComponent implements AfterViewInit {
 
   public onIndexChange(index: number) {
     this.currentSlide = index;
-    console.log('Swiper index: ', this.currentSlide);
   }
 
+  goToSlideNumber(slide: number){
+    this.index = slide;
+  }
 }
