@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, SimpleChanges } from '@angular/core';
-import 'swiper';
+import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
+import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-main-page',
@@ -8,21 +8,40 @@ import 'swiper';
 })
 export class MainPageComponent implements AfterViewInit {
 
-  // do this to make swiper work
-  // `npm install --save @types/swiper`
-  mySwiper: Swiper;
-  indexSwiper: number = 0;
+  public disabled: boolean = false;
+
+  public config: SwiperConfigInterface = {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: true,
+    scrollbar: true,
+    navigation: true,
+    pagination: false
+  };
+
+  private scrollbar: SwiperScrollbarInterface = {
+    el: '.swiper-scrollbar',
+    hide: false,
+    draggable: true
+  };
+
+  private pagination: SwiperPaginationInterface = {
+    el: '.swiper-pagination',
+    clickable: true,
+    hideOnClick: false
+  };
+
+  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+
+
 
   constructor() {
     
   }
 
-
-
   ngAfterViewInit() {
-    this.mySwiper = new Swiper('.swiper-container', {
-      paginationClickable: true,   
-    });
   }
 
 

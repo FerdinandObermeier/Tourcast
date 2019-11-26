@@ -7,17 +7,23 @@
         <button mat-flat-button class="myButtonInactive">Morgen</button>
         <button mat-flat-button class="myButtonInactive">getUebermorgen</button>
     </div>
-    <div class="content">
-        <!-- Swiper -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">Today {{ indexSwiper }}</div>
-              <div class="swiper-slide">Tomorrow</div>
-              <div class="swiper-slide">getUebermorgen</div>
+    
+    <div class="content-container">
+        <swiper class="swiper-container" [config]="config" (indexChange)="onIndexChange($event)">
+          <div class="swiper-slide">
+            <div>
+              test
             </div>
-            <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
           </div>
-    </div>
+          <div class="swiper-slide">
+            <div>
+              test2
+            </div>
+          </div>
+        </swiper>
+      </div>
+
+
+
 </div>
 
