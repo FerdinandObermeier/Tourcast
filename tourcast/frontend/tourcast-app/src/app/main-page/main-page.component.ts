@@ -8,6 +8,8 @@ import 'swiper';
 })
 export class MainPageComponent implements AfterViewInit {
 
+  // do this to make swiper work
+  // `npm install --save @types/swiper`
   mySwiper: Swiper;
   indexSwiper: number = 0;
 
