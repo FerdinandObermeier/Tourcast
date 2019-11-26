@@ -8,6 +8,7 @@ import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterf
 })
 export class MainPageComponent implements AfterViewInit {
 
+  currentSlide: number = 0;
   public disabled: boolean = false;
 
   public config: SwiperConfigInterface = {
@@ -50,6 +51,11 @@ export class MainPageComponent implements AfterViewInit {
     //Add '${implements OnChanges}' to the class.
     // this.indexSwiper = this.mySwiper.activeIndex
     console.log("hi");
+  }
+
+  public onIndexChange(index: number) {
+    this.currentSlide = index;
+    console.log('Swiper index: ', this.currentSlide);
   }
 
 }

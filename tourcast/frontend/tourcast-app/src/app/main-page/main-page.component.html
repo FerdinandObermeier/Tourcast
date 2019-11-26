@@ -3,9 +3,9 @@
 
     </div>
     <div class="days">
-        <button mat-flat-button class="myButtonActive">Heute</button>
-        <button mat-flat-button class="myButtonInactive">Morgen</button>
-        <button mat-flat-button class="myButtonInactive">getUebermorgen</button>
+        <button mat-flat-button [ngClass]="{'myButtonActive': currentSlide == 0, 'myButtonInactive': currentSlide != 0 }">Heute</button>
+        <button mat-flat-button [ngClass]="{'myButtonActive': currentSlide == 1, 'myButtonInactive': currentSlide != 1 }">Morgen</button>
+        <button mat-flat-button [ngClass]="{'myButtonActive': currentSlide == 2, 'myButtonInactive': currentSlide != 2 }">getUebermorgen</button>
     </div>
     
     <div class="content-container">
