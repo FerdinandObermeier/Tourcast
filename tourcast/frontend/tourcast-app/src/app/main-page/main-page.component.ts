@@ -7,16 +7,42 @@ import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterf
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements AfterViewInit {
-
+  
   currentSlide: number = 0;
   public disabled: boolean = false;
   index = 0;
+  private today = new Date();
+  private currentDay;
+  private uebermorgen;
+  private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  
+  constructor() {
+    this.currentDay = this.today.getDay();
+    this.uebermorgen = this.getWeekday(this.currentDay, 2);
+  }
+  
+  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
+
+
+
+  ngAfterViewInit() {
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    // this.indexSwiper = this.mySwiper.activeIndex
+    console.log("hi");
+  }
+  
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
     slidesPerView: 1,
     keyboard: true,
-    mousewheel: true,
+    mousewheel: false,
     scrollbar: false,
     navigation: false,
     pagination: false,
@@ -34,25 +60,6 @@ export class MainPageComponent implements AfterViewInit {
     hideOnClick: false
   };
 
-  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
-  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
-
-
-
-  constructor() {
-    
-  }
-
-  ngAfterViewInit() {
-  }
-
-
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    // this.indexSwiper = this.mySwiper.activeIndex
-    console.log("hi");
-  }
 
   public onIndexChange(index: number) {
     this.currentSlide = index;
@@ -61,5 +68,9 @@ export class MainPageComponent implements AfterViewInit {
   goToSlideNumber(slide: number){
     this.index = slide;
     this.onIndexChange(slide);
+  }
+
+  getWeekday(currentDay:number, offset:number){
+    return this.days[(currentDay + offset) % 7];
   }
 }

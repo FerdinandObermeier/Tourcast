@@ -8,7 +8,6 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 import { FilterComponent } from './filter/filter.component';
 import {MatButtonModule} from '@angular/material/button';
-import {MatTabsModule} from '@angular/material/tabs'; 
 
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
@@ -30,7 +29,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   imports: [
     MatButtonModule,
     BrowserModule,
-    MatTabsModule,
     BrowserAnimationsModule,
     SwiperModule
   ],
