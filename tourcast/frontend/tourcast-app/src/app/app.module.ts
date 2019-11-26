@@ -11,8 +11,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule, MatButton } from '@angular/material/button';
-
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
