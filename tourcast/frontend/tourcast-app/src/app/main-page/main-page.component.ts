@@ -16,8 +16,8 @@ export class MainPageComponent implements AfterViewInit {
     slidesPerView: 1,
     keyboard: true,
     mousewheel: true,
-    scrollbar: true,
-    navigation: true,
+    scrollbar: false,
+    navigation: false,
     pagination: false
   };
 
