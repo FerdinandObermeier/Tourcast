@@ -10,26 +10,29 @@
         display: flex;
         flex-flow: column;
         height: 100%;
-        margin-top: 50px;
+        /* margin-top: 50px; */
     }
 
     .days {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
+        background-color: #a64d7a33;
+        margin: 0.5rem 0 0 0;
     }
 
     .myButtonActive {
         color: #a64d79;
-        background-color: white;
-        margin: 0.3rem 0rem 0rem 0rem;
+        /* background-color: white; */
+        background-color: transparent;
+        margin: 0rem 0rem 0rem 0rem;
         border-bottom: 0.3rem solid #a64d79;
         border-radius: 0rem;
     }
 
     .myButtonInactive {
         color: grey;
-        background-color: white;
-        margin: 0.3rem 0rem 0rem 0rem;
+        background-color: transparent;
+        margin: 0rem 0rem 0rem 0rem;
     }
 
     .filter-icon {
