@@ -10,6 +10,7 @@ import { FilterComponent } from './filter/filter.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './card/card.component';
 import {MatCardModule} from '@angular/material/card';
+//import { jtt_openweathermap } from 'angular-openweathermap-api-factory';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {MatCardModule} from '@angular/material/card';
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    //jtt_openweathermap
   ],
   providers: [],
   bootstrap: [AppComponent]
