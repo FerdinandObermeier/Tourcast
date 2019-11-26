@@ -19,6 +19,7 @@ export class MainPageComponent implements AfterViewInit {
   constructor() {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
+    
   }
   
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -73,4 +74,7 @@ export class MainPageComponent implements AfterViewInit {
   getWeekday(currentDay:number, offset:number){
     return this.days[(currentDay + offset) % 7];
   }
+
+  
+  
 }
