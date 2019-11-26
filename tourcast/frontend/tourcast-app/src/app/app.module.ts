@@ -9,7 +9,7 @@ import { DetailViewComponent } from './detail-view/detail-view.component';
 import { FilterComponent } from './filter/filter.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs'; 
-
+  
 @NgModule({
   declarations: [
     AppComponent,

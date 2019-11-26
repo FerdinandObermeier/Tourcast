@@ -11,27 +11,23 @@ export class MainPageComponent implements AfterViewInit {
   mySwiper: Swiper;
   indexSwiper: number = 0;
 
-  constructor() {}
+  constructor() {
+    
+  }
 
 
 
   ngAfterViewInit() {
     this.mySwiper = new Swiper('.swiper-container', {
-      paginationClickable: true,
+      paginationClickable: true,   
     });
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.indexSwiper = this.mySwiper.activeIndex;
-    console.log("hi");
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    this.indexSwiper = this.mySwiper.activeIndex
+    // this.indexSwiper = this.mySwiper.activeIndex
     console.log("hi");
   }
 
