@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { FilterService } from './services/filter.service';
     
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -40,8 +41,9 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   providers: [
     {
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
+    FilterService
   ],
   bootstrap: [AppComponent]
 })
