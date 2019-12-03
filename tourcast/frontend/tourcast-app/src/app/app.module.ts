@@ -15,6 +15,8 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { FilterService } from './services/filter.service';
+import { BackendService } from './services/http.service';
+import { HttpClientModule } from '@angular/common/http'; 
     
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -36,14 +38,16 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserAnimationsModule,
     MatIconModule,
     MatCardModule,
-    SwiperModule
+    SwiperModule,
+    HttpClientModule
   ],
   providers: [
     {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,
     },
-    FilterService
+    FilterService,
+    BackendService,
   ],
   bootstrap: [AppComponent]
 })
