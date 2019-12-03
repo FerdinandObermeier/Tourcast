@@ -1,4 +1,4 @@
-<div class="card" *ngIf="showAttractions" (click)="showDetails = true">
+<div class="card" *ngIf="showAttractions && cardInfo.attraction || showLakes && cardInfo.lake || showMountains && cardInfo.mountain || showMuseums && cardInfo.museum || showViewpoints && cardInfo.viewpoint" (click)="showDetails = true">
   <div class="image-container">
     <img src={{cardInfo.img}} alt="">
   </div>
