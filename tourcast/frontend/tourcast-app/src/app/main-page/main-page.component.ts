@@ -23,7 +23,7 @@ export class MainPageComponent implements AfterViewInit {
   constructor() {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
-    this.weatherBalloon(); // comment out to disable weather API calls
+    weatherBalloon(this.index); // comment out to disable weather API calls
   }
   
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
