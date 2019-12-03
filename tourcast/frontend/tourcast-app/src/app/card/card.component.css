@@ -37,13 +37,13 @@ img{
 .title{
   margin-bottom: 5px;
   color:black;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 800;
 }
 
 .subtitle{
   margin: 5px 0;
-  font-size: 0.75em;
+  font-size: 0.67em;
   color: gray;
   word-break: break-all;
   hyphens: auto;
@@ -52,7 +52,7 @@ img{
 .crowdedness{
   position: absolute;
   left: 10px;
-  bottom: 50px;
+  bottom: 47px;
   width: 100%;
 }
 
@@ -103,4 +103,60 @@ img{
 
 .closedclass {
   color: red;
+}
+
+
+.ring-container {
+  position: relative;
+}
+
+.circle-open {
+  width: 15px;
+  height: 15px;
+  background-color: #62bd19;
+  border-radius: 50%;
+  position: absolute;
+  top: -37px;
+  left: 12px;
+}
+
+.ringring-open {
+  border: 3px solid #62bd19;
+  -webkit-border-radius: 30px;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  left: 4px;
+  top: -45px;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite; 
+  opacity: 0.0
+}
+
+.circle-close {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  top: -37px;
+  left: 12px;
+}
+
+.ringring-close {
+  border: 3px solid red;
+  -webkit-border-radius: 30px;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  left: 4px;
+  top: -45px;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite; 
+  opacity: 0.0
+}
+@-webkit-keyframes pulsate {
+  0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+  50% {opacity: 1.0;}
+  100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }
