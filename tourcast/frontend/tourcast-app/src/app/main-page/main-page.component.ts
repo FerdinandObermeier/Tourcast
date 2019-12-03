@@ -16,9 +16,7 @@ export class MainPageComponent implements AfterViewInit {
   private currentDay;
   uebermorgen;
   private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  private weatherToday;
-  private weatherTomorrow;
-  private weatherDayAfterTomorrow;
+ 
   
   constructor() {
     this.currentDay = this.today.getDay();
@@ -83,16 +81,11 @@ export class MainPageComponent implements AfterViewInit {
   
   
 }
-function weatherBalloon(t:number) {
-  var key = '{yourkey}';
-  
+function weatherBalloon(t:number) { 
   fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
-    console.log(data);
     var i;
-   
-    //var i: number= parseFloat(data.main.temp);
     var iconName;
     
     if(t==0){
@@ -111,15 +104,6 @@ function weatherBalloon(t:number) {
     }
     document.getElementById('temperature').innerHTML=' '+i + '°C';
     setIcon(iconName);
-    
-    
-    
-    /*this.weatherToday=i;
-    
-    this.weatherTomorrow=3;
-    this.weatherDayAfterTomorrow=4;
-    this.setWeather();
-    */
   })
   .catch(function() {
     // catch any errors
@@ -143,9 +127,7 @@ function weatherBalloon(t:number) {
     else if(iconName==='Thunderstorm'){
       iconNameFA='fa-bolt';
     }
-    //iconNameFA='fa-bolt';
-    //var elem= document.getElementById('iconforWeather');
+    
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
-    console.log(iconName);
     return;
   }
