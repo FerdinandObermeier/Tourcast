@@ -34,12 +34,12 @@ export class MainPageComponent {
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
      // comment out to disable weather API calls
     this.http.get<{ip:string}>('https://jsonip.com')
-    .subscribe( data => {
+    .subscribe( (data) => {
       
       console.log('th data', data);
       this.ipAddress = data.ip;
       this.http.get('http://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
-      .subscribe( data=>{
+      .subscribe( (data: any)=>{
         console.log(data);
         this.latitude = data.latitude;
         this.longitude= data.longitude;
