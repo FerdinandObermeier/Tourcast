@@ -1,4 +1,4 @@
-<div class="card" *ngIf="showAttractions && cardInfo.attraction || showLakes && cardInfo.lake || showMountains && cardInfo.mountain || showMuseums && cardInfo.museum || showViewpoints && cardInfo.viewpoint" (click)="showDetails = true">
+<div class="card" *ngIf="showAttractions && cardInfo.attraction || showLakes && cardInfo.lake || showMountains && cardInfo.mountain || showMuseums && cardInfo.museum || showViewpoints && cardInfo.viewpoint" (click)="onShowDetail()">
   <div class="image-container">
     <img src={{cardInfo.img}} alt="">
   </div>
@@ -8,7 +8,7 @@
       <div class="crowdedness">
           <mat-icon aria-hidden="false" aria-label="Attractions">group</mat-icon>
           <div class="crowdedness-bar">
-            <div class="crowdedness-bar-inner">
+            <div class="crowdedness-bar-inner" [ngStyle]="{'width': cardInfo.crowdedness + '%'}">
               
             </div>
           </div>
@@ -22,4 +22,4 @@
       <mat-icon *ngIf="cardInfo.viewpoint" aria-hidden="false" aria-label="Attractions">panorama</mat-icon>
     </div>
   </div>
-    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo"></app-detail-view>
+    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo" [scrollOffsetTop]="scrollOffsetTop"></app-detail-view>

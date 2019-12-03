@@ -16,6 +16,7 @@ export class CardComponent implements OnInit {
   showMountains = true;
   showMuseums = true;
   showViewpoints = true;
+  scrollOffsetTop: number = 0;
   subtitle: string; // should be generated from the below
 
   constructor(
@@ -70,5 +71,12 @@ export class CardComponent implements OnInit {
 
   onCloseDetails(showDetails: boolean) {
     this.showDetails = showDetails;
+  }
+
+  onShowDetail() {
+    this.showDetails = true;
+    let doc = document.documentElement;
+    this.scrollOffsetTop = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+    console.log(this.scrollOffsetTop);
   }
 }

@@ -7,7 +7,7 @@
         <button mat-flat-button (click)="goToSlideNumber(2)"
         [ngClass]="{'myButtonActive': currentSlide == 2, 'myButtonInactive': currentSlide != 2 }"> {{ uebermorgen }}</button>
     </div>
-    <hr style="width: 100%; color: lightgray; margin-top: 0rem;">
+    <hr style="width: 100%; color: lightgray; margin-top: 0rem; position: fixed; top: 90px; left: 0; z-index: 500">
     <div class="content-container">
         <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
           <div class="swiper-slide">

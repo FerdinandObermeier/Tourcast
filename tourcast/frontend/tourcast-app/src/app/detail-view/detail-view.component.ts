@@ -9,6 +9,7 @@ export class DetailViewComponent implements OnInit {
 
   @Output() onCloseDetails = new EventEmitter<boolean>();
   @Input() cardInfo;
+  @Input() scrollOffsetTop;
 
   constructor() { }
 
