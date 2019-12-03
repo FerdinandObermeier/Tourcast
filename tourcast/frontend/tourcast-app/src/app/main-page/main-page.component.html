@@ -12,17 +12,18 @@
         <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
           <div class="swiper-slide">
             <div>
-              <app-card></app-card>
+              <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
+              <!-- <button (click)="ferdiscall()">test</button> -->
             </div>
           </div>
           <div class="swiper-slide">
             <div>
-              Morgen
+              <!-- <app-card></app-card> -->
             </div>
           </div>
           <div class="swiper-slide">
             <div>
-              getUebermorgen
+              <!-- <app-card></app-card> -->
             </div>
           </div>
         </swiper>

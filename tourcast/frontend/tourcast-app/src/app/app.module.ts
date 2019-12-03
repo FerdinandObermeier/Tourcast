@@ -16,6 +16,9 @@ import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {HttpClientModule} from '@angular/common/http';
+import { FilterService } from './services/filter.service';
+import { BackendService } from './services/http.service';
+import { HttpClientModule } from '@angular/common/http'; 
     
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -44,8 +47,10 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   providers: [
     {
       provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG
-    }
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
+    FilterService,
+    BackendService,
   ],
   bootstrap: [AppComponent]
 })

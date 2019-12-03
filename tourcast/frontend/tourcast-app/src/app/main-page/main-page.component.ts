@@ -2,13 +2,14 @@ import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/cor
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 import {HttpClient} from '@angular/common/http';
 import { async } from 'q';
+import { BackendService } from '../services/http.service';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent implements AfterViewInit {
+export class MainPageComponent {
   
   currentSlide: number = 0;
   public disabled: boolean = false;
@@ -21,8 +22,14 @@ export class MainPageComponent implements AfterViewInit {
   latitude;
   longitude;
 
+
+  cards:any; 
+
   
-  constructor(private http: HttpClient) {
+  constructor(
+    private backendService: BackendService,
+    private http: HttpClient
+  ) {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
      // comment out to disable weather API calls
@@ -45,18 +52,17 @@ export class MainPageComponent implements AfterViewInit {
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
-
-
-
-  ngAfterViewInit() {
+  ngOnInit() {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.backendService.getCards().subscribe((data) => {
+      this.cards = data;
+    });
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    // this.indexSwiper = this.mySwiper.activeIndex
-    console.log("hi");
   }
   
   public config: SwiperConfigInterface = {
@@ -96,8 +102,28 @@ export class MainPageComponent implements AfterViewInit {
   getWeekday(currentDay:number, offset:number){
     return this.days[(currentDay + offset) % 7];
   }
+
   
-  
+  weatherBalloon() {
+    var key = '{yourkey}';
+    var t = this.index;
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
+    .then(function(resp) { return resp.json() }) // Convert data to json
+    .then(function(data) {
+      console.log(data);
+      var act=0;
+      if(t==0){
+        act=data.main.temp;
+      }
+      else if(t==1){
+        act=1;
+      }
+      document.getElementById('temperature').innerHTML=' '+act + '°C';
+    })
+    .catch(function() {
+      // catch any errors
+    });
+  }
 }
 
 
