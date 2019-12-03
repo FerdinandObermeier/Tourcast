@@ -72,8 +72,14 @@ img{
     margin:auto;
 }
 
+.descriptionContainer{
+    overflow: scroll;
+    height:20vmax;
+}
+
 .description{
     margin: 20px 0;
+    
 }
 
 .buttons{
@@ -94,3 +100,7 @@ button{
     color: #0a2239;
     z-index: 6;
 }
+.rating{
+    color: rgb(233, 203, 37);
+  }
+  
