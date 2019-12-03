@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
-
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-main-page',
@@ -16,12 +16,24 @@ export class MainPageComponent implements AfterViewInit {
   private currentDay;
   uebermorgen;
   private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
- 
+  ipAddress;
+
   
-  constructor() {
+  constructor(private http: HttpClient) {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
     weatherBalloon(this.index); // comment out to disable weather API calls
+    
+    this.http.get<{ip:string}>('https://jsonip.com')
+    .subscribe( data => {
+      
+      console.log('th data', data);
+      this.ipAddress = data.ip;
+    });
+    this.http.get('http://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
+    .subscribe( data=>{
+        console.log(data);
+    });
   }
   
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -131,3 +143,5 @@ function weatherBalloon(t:number) {
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
     return;
   }
+ 
+ 
