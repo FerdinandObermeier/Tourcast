@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class DetailViewComponent implements OnInit {
 
   @Output() onCloseDetails = new EventEmitter<boolean>();
+  @Input() cardInfo;
 
   constructor() { }
 

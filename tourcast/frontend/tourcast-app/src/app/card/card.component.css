@@ -1,6 +1,6 @@
 .card{
-  width: 50%;
-  height: 300px;
+  width: calc(50vw - 20px);
+  height: 255px;
   box-shadow: 0 0 12px 0 #d7d7d7;
   margin: 20px 10px;
   position: relative;
@@ -30,7 +30,7 @@ img{
   top: 150px;
   left: 0;
   height: 150px;
-  width: 100%;
+  width: 90%;
   padding: 0 10px;
 }
 
@@ -45,9 +45,15 @@ img{
   margin: 5px 0;
   font-size: 0.75em;
   color: gray;
+  word-break: break-all;
+  hyphens: auto;
 }
 
 .crowdedness{
+  position: absolute;
+  left: 10px;
+  bottom: 50px;
+  width: 100%;
 }
 
 .crowdedness-bar{
@@ -65,7 +71,6 @@ img{
   top: 0;
   left: 0;
   height: 5px;
-  width: 50%;
   background-color: rgb(166, 77, 122);
 }
 
@@ -73,14 +78,28 @@ img{
   vertical-align: middle;
 }
 
-.rating{
-  color: rgb(233, 203, 37);
-}
 
-.icon{
+.icon-bar{
   position: absolute;
+  display: flex;
   top: -7px;
   right: 12px;
   z-index: 2;
-  color: white;
+  color: #e0e0e0;
+}
+
+.icon-bar > mat-icon {
+  margin-left: 5px;
+}
+
+.openess {
+  font-size: small;
+}
+
+.openclass {
+  color: green;
+}
+
+.closedclass {
+  color: red;
 }

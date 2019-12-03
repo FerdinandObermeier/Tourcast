@@ -7,22 +7,22 @@
         <button mat-flat-button (click)="goToSlideNumber(2)"
         [ngClass]="{'myButtonActive': currentSlide == 2, 'myButtonInactive': currentSlide != 2 }"> {{ uebermorgen }}</button>
     </div>
-    <hr style="width: 100%; color: lightgray; margin-top: 0rem;">
+    <hr style="width: 100%; color: lightgray; margin-top: 0rem; position: fixed; top: 90px; left: 0; z-index: 500">
     <div class="content-container">
         <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
           <div class="swiper-slide">
-            <div>
-              <app-card></app-card>
+            <div class="card-container">
+              <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>              
             </div>
           </div>
           <div class="swiper-slide">
             <div>
-              <app-card></app-card>
+                <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
+              </div>
             </div>
-          </div>
-          <div class="swiper-slide">
-            <div>
-              <app-card></app-card>
+            <div class="swiper-slide">
+              <div>
+                  <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
             </div>
           </div>
         </swiper>

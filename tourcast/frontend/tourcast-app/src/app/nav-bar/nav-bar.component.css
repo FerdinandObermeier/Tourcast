@@ -4,7 +4,7 @@
     top:0;
     left:0;
     height:30px;
-    background-color: #a64d7a33;
+    background-color: rgb(237,219,228);
     color: #a64d79;
     display:grid;
     grid-template-columns: 90px 1fr 90px;

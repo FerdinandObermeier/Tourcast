@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { 
-    height: 100%; 
+    height: calc(100vh - 90px); 
     margin: 0;
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
     overflow-x: hidden; 
 }
-body { padding-top: 42px; font-family: 'Comfortaa', serif; }
+body { margin-top: 90px; font-family: 'Comfortaa', serif; }
