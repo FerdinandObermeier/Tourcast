@@ -1,12 +1,13 @@
 import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
+import { BackendService } from '../services/http.service';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent implements AfterViewInit {
+export class MainPageComponent {
   
   currentSlide: number = 0;
   public disabled: boolean = false;
@@ -15,8 +16,13 @@ export class MainPageComponent implements AfterViewInit {
   private currentDay;
   uebermorgen;
   private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  cards:any; 
+
   
-  constructor() {
+  constructor(
+    private backendService: BackendService 
+  ) {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
     this.weatherBalloon(); // comment out to disable weather API calls
@@ -25,18 +31,17 @@ export class MainPageComponent implements AfterViewInit {
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
-
-
-
-  ngAfterViewInit() {
+  ngOnInit() {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.backendService.getCards().subscribe((data) => {
+      this.cards = data;
+    });
   }
-
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    // this.indexSwiper = this.mySwiper.activeIndex
-    console.log("hi");
   }
   
   public config: SwiperConfigInterface = {
@@ -75,6 +80,10 @@ export class MainPageComponent implements AfterViewInit {
     return this.days[(currentDay + offset) % 7];
   }
 
+  // async getCardsFromBackend() {
+  //    this.cards = await this.backendService.getCards();
+  // }
+
   
   weatherBalloon() {
     var key = '{yourkey}';
@@ -82,7 +91,7 @@ export class MainPageComponent implements AfterViewInit {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
-      console.log(data);
+      // console.log(data);
       var act=0;
       if(t==0){
         act=data.main.temp;
