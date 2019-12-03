@@ -26,4 +26,4 @@
       <mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
     </div>
   </div>
-    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)"></app-detail-view>
+    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo"></app-detail-view>

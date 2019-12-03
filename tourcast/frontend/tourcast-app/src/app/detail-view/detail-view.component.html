@@ -4,11 +4,11 @@
             <mat-icon aria-hidden="false" aria-label="Attractions">close</mat-icon>
         </div>
         <div class="image-container">       
-            <img src="../../assets/images/neuschwanstein.jpeg" alt="">
+            <img src={{cardInfo.img}} alt="">
         </div>
         <div class="text-container">
             <div class="title">
-                <b>Schloss Neuschwanstein</b>
+                <b>{{ cardInfo.name }}</b>
             </div>
             <div class="rating">
             <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
@@ -46,7 +46,7 @@
             </div>
             <div class="descriptionContainer">
                 <div class="description">
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                     {{ cardInfo.description }}}
                 </div>
                 <div class="buttons">      
                     <button mat-raised-button color="primary">I will go there!</button>
