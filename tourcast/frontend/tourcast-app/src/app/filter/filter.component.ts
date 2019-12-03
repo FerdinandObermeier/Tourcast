@@ -41,6 +41,7 @@ export class FilterComponent implements OnInit {
           break;
       }
     });
+    this.filterService.getCurrentFilters();
   }
 
   toggleFilter(filterType: Filters) {
