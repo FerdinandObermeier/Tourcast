@@ -16,7 +16,6 @@ export class CardComponent implements OnInit {
   showMountains = true;
   showMuseums = true;
   showViewpoints = true;
-  scrollOffsetTop: number = 0;
   subtitle: string; // should be generated from the below
   timeFrom: string;
   timeTo: string;
