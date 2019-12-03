@@ -13,17 +13,13 @@
             </div>
           </div>
       </div>
-      <!--div class="rating">
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-      </div-->
       </div>
-    <!-- </div> -->
-    <div class="icon">
-      <mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
+    <div class="icon-bar">
+      <mat-icon *ngIf="cardInfo.attraction" aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
+      <mat-icon *ngIf="cardInfo.lake" aria-hidden="false" aria-label="Attractions">directions_boat</mat-icon>
+      <mat-icon *ngIf="cardInfo.mountain" aria-hidden="false" aria-label="Attractions">landscape</mat-icon>
+      <mat-icon *ngIf="cardInfo.museum" aria-hidden="false" aria-label="Attractions">museum</mat-icon>
+      <mat-icon *ngIf="cardInfo.viewpoint" aria-hidden="false" aria-label="Attractions">panorama</mat-icon>
     </div>
   </div>
     <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo"></app-detail-view>

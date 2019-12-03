@@ -1,5 +1,5 @@
 .card{
-  width: 50%;
+  width: calc(50vw - 20px);
   height: 255px;
   box-shadow: 0 0 12px 0 #d7d7d7;
   margin: 20px 10px;
@@ -30,7 +30,7 @@ img{
   top: 150px;
   left: 0;
   height: 150px;
-  width: 100%;
+  width: 90%;
   padding: 0 10px;
 }
 
@@ -45,9 +45,15 @@ img{
   margin: 5px 0;
   font-size: 0.75em;
   color: gray;
+  word-break: break-all;
+  hyphens: auto;
 }
 
 .crowdedness{
+  position: absolute;
+  left: 10px;
+  bottom: 50px;
+  width: 100%;
 }
 
 .crowdedness-bar{
@@ -74,10 +80,15 @@ img{
 }
 
 
-.icon{
+.icon-bar{
   position: absolute;
+  display: flex;
   top: -7px;
   right: 12px;
   z-index: 2;
-  color: white;
+  color: #e0e0e0;
+}
+
+.icon-bar > mat-icon {
+  margin-left: 5px;
 }

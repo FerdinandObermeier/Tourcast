@@ -45,6 +45,11 @@
         height:auto;
     }
 
+    .card-container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
     .swiper-container {
         position: absolute;
         width: 100%;

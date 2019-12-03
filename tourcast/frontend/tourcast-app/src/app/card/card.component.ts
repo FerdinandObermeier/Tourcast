@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FilterService } from '../services/filter.service';
 import { Filters } from '../filters.enum';
-import { BackendService } from '../services/http.service';
 
 
 @Component({
@@ -11,60 +10,19 @@ import { BackendService } from '../services/http.service';
 })
 export class CardComponent implements OnInit {
   @Input() cardInfo;
-  subtitle: string; // should be generated from the above
+  showDetails = false;
+  showAttractions = true;
+  showLakes = true;
+  showMountains = true;
+  showMuseums = true;
+  showViewpoints = true;
+  subtitle: string; // should be generated from the below
 
-  generateSubtitle() {
-    this.subtitle = '';
-    this.cardInfo.touched = false;
-    if (this.cardInfo.attraction) {
-      this.subtitle += 'Attraction';
-      this.cardInfo.touched = true;
-    }
-    if (this.cardInfo.lake) {
-      if (this.cardInfo.touched) {
-          this.subtitle += 'Lake';
-        } else {
-          this.subtitle += ' Lake';
-          this.cardInfo.touched = true;
-        }
-    }
-    if (this.cardInfo.mountain) {
-      if (this.cardInfo.touched) {
-        this.subtitle += 'Mountain';
-      } else {
-        this.subtitle += ' Mountain';
-        this.cardInfo.touched = true;
-      }
-    }
-    if (this.cardInfo.museum) {
-      this.subtitle += 'Museum';
-    } else {
-      this.subtitle += ' Museum';
-      this.cardInfo.touched = true;
-    }
-    if (this.cardInfo.viewpoint) {
-      this.subtitle += 'Viewpoint';
-    } else {
-      this.subtitle += ' Viewpoint';
-      this.cardInfo.touched = true;
-    }
-  }
-  
-  
-  showDetails: boolean = false;
-  
   constructor(
-    private filterService: FilterService,
-    private backendService: BackendService
+    private filterService: FilterService
     ) { }
 
-    showAttractions = true;
-    showLakes = true;
-    showMountains = true;
-    showMuseums = true;
-    showViewpoints = true;
-    
-    ngOnInit() {
+  ngOnInit() {
     this.generateSubtitle();
     this.filterService.filterChange.subscribe(({filterType, value}) => {
       switch (filterType) {
@@ -88,8 +46,28 @@ export class CardComponent implements OnInit {
       }
     });
   }
-  
-  
+
+
+  generateSubtitle() {
+    this.subtitle = '';
+    if (this.cardInfo.attraction) {
+      this.subtitle += 'Attraction';
+    }
+    if (this.cardInfo.lake) {
+      this.subtitle.length === 0 ? this.subtitle += 'Lake' : this.subtitle += ', Lake';
+    }
+    if (this.cardInfo.mountain) {
+      this.subtitle.length === 0 ? this.subtitle += 'Mountain' : this.subtitle += ', Mountain';
+    }
+    if (this.cardInfo.museum) {
+      this.subtitle.length === 0 ? this.subtitle += 'Museum' : this.subtitle += ', Museum';
+    }
+    if (this.cardInfo.viewpoint) {
+      this.subtitle.length === 0 ? this.subtitle += 'Viewpoint' : this.subtitle += ', Viewpoint';
+    }
+  }
+
+
   onCloseDetails(showDetails: boolean) {
     this.showDetails = showDetails;
   }

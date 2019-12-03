@@ -11,7 +11,7 @@
     <div class="content-container">
         <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
           <div class="swiper-slide">
-            <div>
+            <div class="card-container">
               <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
               <!-- <button (click)="ferdiscall()">test</button> -->
             </div>

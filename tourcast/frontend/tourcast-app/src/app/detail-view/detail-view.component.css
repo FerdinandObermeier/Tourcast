@@ -1,7 +1,7 @@
 .detail-card{
     margin: 10px;
     width: calc(100% - 20px);
-    height: calc(100% - 80px);
+    height: calc(100% - 130px);
     background-color: white;
     position: absolute;
     top: 0;
@@ -43,7 +43,7 @@ img{
 .text-container{
     position: absolute;
     top: 30%;
-    height: 60%;
+    height: calc(70% - 40px);
     padding: 20px;
 }
 
@@ -51,7 +51,7 @@ img{
     color:black;
     font-size: 1em;
     font-weight: 800;
-    padding: 20px 0;
+    padding: 10px 0;
     text-align: center;
 }
 
@@ -65,22 +65,15 @@ img{
     display: grid;
     grid-template-rows: 1fr 1fr;
     text-align: center;
-    padding: 10px 0;
     vertical-align:center;
 }
 
 .info-item mat-icon{
     margin:auto;
 }
-
 .descriptionContainer{
     overflow: scroll;
     height:20vmax;
-}
-
-.description{
-    margin: 20px 0;
-    
 }
 
 .buttons{
@@ -101,8 +94,8 @@ button{
     color: #0a2239;
     z-index: 6;
 }
+
 .rating{
     color: rgb(233, 203, 37);
     text-align: center;
-  }
-  
+}
