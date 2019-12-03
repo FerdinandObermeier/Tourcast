@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 import {HttpClient} from '@angular/common/http';
+import { async } from 'q';
 
 @Component({
   selector: 'app-main-page',
@@ -17,23 +18,28 @@ export class MainPageComponent implements AfterViewInit {
   uebermorgen;
   private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   ipAddress;
+  latitude;
+  longitude;
 
   
   constructor(private http: HttpClient) {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
-    weatherBalloon(this.index); // comment out to disable weather API calls
-    
+     // comment out to disable weather API calls
     this.http.get<{ip:string}>('https://jsonip.com')
     .subscribe( data => {
       
       console.log('th data', data);
       this.ipAddress = data.ip;
-    });
-    this.http.get('http://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
-    .subscribe( data=>{
+      this.http.get('http://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
+      .subscribe( data=>{
         console.log(data);
+        this.latitude = data.latitude;
+        this.longitude= data.longitude;
+        weatherBalloon(this.index, this.longitude, this.latitude);
+      });
     });
+    
   }
   
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -79,7 +85,7 @@ export class MainPageComponent implements AfterViewInit {
   public onIndexChange(index: number) {
     this.currentSlide = index;
     
-    weatherBalloon(index);
+    weatherBalloon(index,  this.longitude, this.latitude);
   }
 
   goToSlideNumber(slide: number){
@@ -93,8 +99,11 @@ export class MainPageComponent implements AfterViewInit {
   
   
 }
-function weatherBalloon(t:number) { 
-  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
+
+
+
+function weatherBalloon(t:number, long:number, lat:number) { 
+  fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat+ '&lon='+long+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
     var i;
