@@ -48,7 +48,6 @@ export class CardComponent implements OnInit {
       this.subtitle += ' Viewpoint';
       this.cardInfo.touched = true;
     }
-    console.log(this.subtitle);
   }
   
   
