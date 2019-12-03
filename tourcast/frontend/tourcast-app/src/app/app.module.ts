@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -35,7 +36,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     BrowserAnimationsModule,
     MatIconModule,
     MatCardModule,
-    SwiperModule
+    SwiperModule,
+    FontAwesomeModule
   ],
   providers: [
     {

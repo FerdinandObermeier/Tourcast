@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -15,11 +16,14 @@ export class MainPageComponent implements AfterViewInit {
   private currentDay;
   private uebermorgen;
   private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  private weatherToday;
+  private weatherTomorrow;
+  private weatherDayAfterTomorrow;
   
   constructor() {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
-    this.weatherBalloon();
+    weatherBalloon(this.index);
   }
   
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -64,6 +68,8 @@ export class MainPageComponent implements AfterViewInit {
 
   public onIndexChange(index: number) {
     this.currentSlide = index;
+    
+    weatherBalloon(index);
   }
 
   goToSlideNumber(slide: number){
@@ -74,26 +80,72 @@ export class MainPageComponent implements AfterViewInit {
   getWeekday(currentDay:number, offset:number){
     return this.days[(currentDay + offset) % 7];
   }
-
   
-  weatherBalloon() {
-    var key = '{yourkey}';
-    var t = this.index;
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
-    .then(function(resp) { return resp.json() }) // Convert data to json
-    .then(function(data) {
-      console.log(data);
-      var act=0;
-      if(t==0){
-        act=data.main.temp;
-      }
-      else if(t==1){
-        act=1;
-      }
-      document.getElementById('temperature').innerHTML=' '+act + '°C';
-    })
-    .catch(function() {
-      // catch any errors
-    });
-  }
+  
 }
+function weatherBalloon(t:number) {
+  var key = '{yourkey}';
+  
+  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
+  .then(function(resp) { return resp.json() }) // Convert data to json
+  .then(function(data) {
+    console.log(data);
+    var i;
+   
+    //var i: number= parseFloat(data.main.temp);
+    var iconName;
+    
+    if(t==0){
+      i= data.list[0].main.temp;
+      iconName=data.list[0].weather[0].main;
+
+    }
+    else if(t==1){
+      i= data.list[7].main.temp;
+      iconName=data.list[7].weather[0].main;
+    }
+    else{
+      i= i= data.list[15].main.temp;
+      iconName=data.list[15].weather[0].main;
+      
+    }
+    document.getElementById('temperature').innerHTML=' '+i + '°C';
+    setIcon(iconName);
+    
+    
+    
+    /*this.weatherToday=i;
+    
+    this.weatherTomorrow=3;
+    this.weatherDayAfterTomorrow=4;
+    this.setWeather();
+    */
+  })
+  .catch(function() {
+    // catch any errors
+  });
+}
+
+ function setIcon(iconName: String){
+   var iconNameFA;
+    if(iconName==='Clear'){
+      iconNameFA='fa-sun'
+    }
+    else if(iconName==='Snow'){
+      iconNameFA='fa-snowflake'
+    }
+    else if(iconName==='Rain'){
+      iconNameFA='fa-showers-heavy'
+    }
+    else if(iconName==='Clouds'){
+      iconNameFA='fa-cloud';
+    }
+    else if(iconName==='Thunderstorm'){
+      iconNameFA='fa-bolt';
+    }
+    //iconNameFA='fa-bolt';
+    //var elem= document.getElementById('iconforWeather');
+    document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
+    console.log(iconName);
+    return;
+  }
