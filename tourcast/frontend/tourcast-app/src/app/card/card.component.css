@@ -92,3 +92,15 @@ img{
 .icon-bar > mat-icon {
   margin-left: 5px;
 }
+
+.openess {
+  font-size: small;
+}
+
+.openclass {
+  color: green;
+}
+
+.closedclass {
+  color: red;
+}

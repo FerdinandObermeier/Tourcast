@@ -17,6 +17,9 @@ export class CardComponent implements OnInit {
   showMuseums = true;
   showViewpoints = true;
   subtitle: string; // should be generated from the below
+  timeFrom: string;
+  timeTo: string;
+  isOpen: boolean = false;
 
   constructor(
     private filterService: FilterService
@@ -24,6 +27,7 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
     this.generateSubtitle();
+    this.generateTime();
     this.filterService.filterChange.subscribe(({filterType, value}) => {
       switch (filterType) {
         case Filters.Attractions:
@@ -70,5 +74,37 @@ export class CardComponent implements OnInit {
 
   onCloseDetails(showDetails: boolean) {
     this.showDetails = showDetails;
+  }
+
+  generateTime() {
+    let hoursFrom, minutesFrom, hoursTo, minutesTo, temp;
+    let nowHours = new Date().getHours();
+    let nowMinutes = new Date().getMinutes();
+
+    temp = this.cardInfo.openingHoursFrom.substr(11);
+    temp = temp.substr(0,5);
+    this.timeFrom = temp;
+    temp = this.cardInfo.openingHoursTo.substr(11);
+    temp = temp.substr(0,5);
+    this.timeTo = temp;
+
+    hoursFrom = parseInt(this.timeFrom.substr(0,2));
+    minutesFrom = parseInt(this.timeFrom.substr(3,4));
+    hoursTo = parseInt(this.timeTo.substr(0,2));
+    minutesTo = parseInt(this.timeTo.substr(3,4));
+
+    // console.log(hoursTo);
+    // console.log(hoursFrom);
+    // console.log(nowHours);
+
+    if (hoursFrom < nowHours) {
+      if (nowHours < hoursTo) {
+        if (minutesFrom < nowMinutes) {
+          if (nowMinutes < minutesTo) {
+            this.isOpen = true;
+          }
+        }
+      }
+    }
   }
 }

@@ -13,6 +13,16 @@
             </div>
           </div>
       </div>
+      <ng-container *ngIf="isOpen; else elseTemplate" >
+        <div class="openess openclass">
+          Open
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate >
+        <div class="openess closedclass">
+          Closed
+        </div>
+      </ng-template>
       </div>
     <div class="icon-bar">
       <mat-icon *ngIf="cardInfo.attraction" aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
