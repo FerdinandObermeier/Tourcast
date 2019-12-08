@@ -73,8 +73,6 @@ img{
     margin:auto;
 }
 .descriptionContainer{
-    overflow: scroll;
-    height:20vmax;
 }
 
 .buttons{
