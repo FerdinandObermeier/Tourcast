@@ -3,6 +3,7 @@ import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterf
 import {HttpClient} from '@angular/common/http';
 import { async } from 'q';
 import { BackendService } from '../services/http.service';
+import { TestBed } from '@angular/core/testing';
 
 @Component({
   selector: 'app-main-page',
@@ -56,7 +57,8 @@ export class MainPageComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.backendService.getCards().subscribe((data) => {
-      this.cards = data;
+      let temp: any = data;
+      this.cards = temp.slice(0,9);
     });
   }
 
