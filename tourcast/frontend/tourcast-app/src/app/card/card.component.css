@@ -128,7 +128,7 @@ img{
   position: absolute;
   left: 4px;
   top: -45px;
-  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation: pulsate 7s ease-out;
   -webkit-animation-iteration-count: infinite; 
   opacity: 0.0
 }
@@ -151,12 +151,14 @@ img{
   position: absolute;
   left: 4px;
   top: -45px;
-  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation: pulsate 7s ease-out;
   -webkit-animation-iteration-count: infinite; 
   opacity: 0.0
 }
 @-webkit-keyframes pulsate {
   0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
-  50% {opacity: 1.0;}
+  70% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+  /* 50% {opacity: 1.0;} */
+  90% {opacity: 1.0;}
   100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
 }
