@@ -19,9 +19,6 @@ export class DetailViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.cardInfo);
-    console.log(this.timeFrom);
-    console.log(this.timeTo);
     if (this.cardInfo.priceMax == '0.00') {
       this.priceTag = 'Free Entrance';
     } else {
@@ -33,7 +30,6 @@ export class DetailViewComponent implements OnInit {
       this.openingTime = this.timeFrom + ' - ' + this.timeTo;
     }
     this.rating = +this.cardInfo.rating.slice(0,1);
-    console.log(this.rating);
   }
 
   onClose() {
