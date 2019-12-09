@@ -11,11 +11,16 @@
                 <b>{{ cardInfo.name }}</b>
             </div>
             <div class="rating">
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+            <mat-icon *ngIf="rating > 0" aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon *ngIf="rating > 1" aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon *ngIf="rating > 2" aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon *ngIf="rating > 3" aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon *ngIf="rating > 4" aria-hidden="false" aria-label="Attractions">star</mat-icon>
+            <mat-icon *ngIf="rating < 1" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+            <mat-icon *ngIf="rating < 2" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+            <mat-icon *ngIf="rating < 3" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+            <mat-icon *ngIf="rating < 4" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+            <mat-icon *ngIf="rating < 5" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
             </div>
             <hr>
             <div class="info">
@@ -24,7 +29,7 @@
                         <mat-icon aria-hidden="false" aria-label="Attractions">money</mat-icon>
                     </div>
                     <div>
-                        30 - 50 €
+                        {{ priceTag }}
                     </div>
                 </div>
                 <div class="info-item" (click)="onOpenLink('https://www.google.com/maps/search/?api=1&query=Schloss+Neuschwanstein')">
@@ -40,7 +45,7 @@
                         <mat-icon aria-hidden="false" aria-label="Attractions">access_time</mat-icon>
                     </div>
                     <div>
-                        10:00 - 20:00
+                        {{ openingTime }}
                     </div>
                 </div>
             </div>

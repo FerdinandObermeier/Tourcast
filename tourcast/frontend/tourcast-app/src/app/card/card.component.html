@@ -43,4 +43,4 @@
       <mat-icon *ngIf="cardInfo.viewpoint" aria-hidden="false" aria-label="Attractions">panorama</mat-icon>
     </div>
   </div>
-    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo"></app-detail-view>
+    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo" [timeFrom]="timeFrom" [timeTo]="timeTo"></app-detail-view>
