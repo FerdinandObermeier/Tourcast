@@ -34,20 +34,21 @@ export class MainPageComponent {
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
      // comment out to disable weather API calls
-    this.http.get<{ip:string}>('https://jsonip.com')
+    /*this.http.get<{ip:string}>('https://jsonip.com')
     .subscribe( (data) => {
       
       console.log('th data', data);
       this.ipAddress = data.ip;
-      this.http.get('http://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
+      this.http.get('https://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
       .subscribe( (data: any)=>{
         console.log(data);
         this.latitude = data.latitude;
         this.longitude= data.longitude;
-        weatherBalloon(this.index, this.longitude, this.latitude);
-      });
-    });
-    
+       
+      }); 
+      
+    });*/
+    weatherBalloon(this.index, this.longitude, this.latitude);
   }
   
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -106,7 +107,7 @@ export class MainPageComponent {
   }
 
   
-  weatherBalloon() {
+  /*weatherBalloon() {
     var key = '{yourkey}';
     var t = this.index;
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
@@ -125,13 +126,13 @@ export class MainPageComponent {
     .catch(function() {
       // catch any errors
     });
-  }
+  }+ lat+ '&lon='+long+
+*/
 }
 
 
-
 function weatherBalloon(t:number, long:number, lat:number) { 
-  fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat+ '&lon='+long+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
+  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
     var i;
