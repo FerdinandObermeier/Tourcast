@@ -177,8 +177,12 @@ function weatherBalloon(t:number, long:number, lat:number) {
     else if(iconName==='Thunderstorm'){
       iconNameFA='fa-bolt';
     }
-    
+    var elem =document.getElementsByClassName('fas')[0];
+    if(elem.classList.length>1){
+      elem.classList.remove(elem.classList[1]);
+    }
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
+    
     return;
   }
  
