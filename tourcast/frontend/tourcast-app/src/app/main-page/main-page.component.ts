@@ -169,7 +169,7 @@ function weatherBalloon(t:number, long:number, lat:number) {
       iconNameFA='fa-snowflake'
     }
     else if(iconName==='Rain'){
-      iconNameFA='fa-showers-heavy'
+      iconNameFA='fa-cloud-showers-heavy'
     }
     else if(iconName==='Clouds'){
       iconNameFA='fa-cloud';
