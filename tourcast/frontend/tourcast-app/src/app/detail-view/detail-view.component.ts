@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-detail-view',
@@ -7,18 +8,29 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DetailViewComponent implements OnInit {
 
-  @Output() onCloseDetails = new EventEmitter<boolean>();
-  @Input() cardInfo;
-  @Input() timeFrom;
-  @Input() timeTo;
+  showDetails = false;
+  cardInfo;
+  timeFrom;
+  timeTo;
 
   priceTag: any;
   openingTime: any;
   rating: any;
 
-  constructor() { }
+  constructor(private messageService: MessageService) {
+    this.messageService.getShowDetails().subscribe((data: any) => {
+      this.cardInfo = data.cardInfo;
+      this. timeFrom = data.timeFrom;
+      this.timeTo = data.timeTo;
+      this.onCalculateInformation();
+      this.showDetails = true;
+    });
+  }
 
   ngOnInit() {
+  }
+
+  onCalculateInformation() {
     if (this.cardInfo.priceMax == '0.00') {
       this.priceTag = 'Free Entrance';
     } else {
@@ -33,7 +45,7 @@ export class DetailViewComponent implements OnInit {
   }
 
   onClose() {
-    this.onCloseDetails.emit(false);
+    this.showDetails = false;
   }
 
   onOpenLink(link: string) {

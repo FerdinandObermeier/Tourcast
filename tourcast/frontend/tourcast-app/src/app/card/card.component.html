@@ -1,46 +1,34 @@
-<div class="card" *ngIf="showAttractions && cardInfo.attraction || showLakes && cardInfo.lake || showMountains && cardInfo.mountain || showMuseums && cardInfo.museum || showViewpoints && cardInfo.viewpoint" (click)="showDetails = true">
+<div class="card" *ngIf="showAttractions && cardInfo.attraction || showLakes && cardInfo.lake || showMountains && cardInfo.mountain || showMuseums && cardInfo.museum || showViewpoints && cardInfo.viewpoint" (click)="onShowDetails()">
+  <div class="openess-indicator">
+    <div class="ring-container">
+        <div [ngClass]="{'ringring-open': isOpen, 'ringring-close': !isOpen}"></div>
+        <div [ngClass]="{'circle-open': isOpen, 'circle-close': !isOpen}"></div>
+    </div>
+  </div>
   <div class="image-container">
     <img src={{cardInfo.img}} alt="">
   </div>
-  <div class="text-container"> 
-      <div class="title">
-          <div class="ring-container">
-              <div [ngClass]="{'ringring-open': isOpen, 'ringring-close': !isOpen}"></div>
-              <div [ngClass]="{'circle-open': isOpen, 'circle-close': !isOpen}"></div>
-          </div>
-        {{ cardInfo.name }}</div>
-      <div class="subtitle">{{ subtitle }}</div>
-      <div class="crowdedness">
-        <div>
-          <mat-icon aria-hidden="false" aria-label="Attractions">group</mat-icon>
-          <div class="crowdedness-bar">
-            <div class="crowdedness-bar-inner" [ngStyle]="{'width': cardInfo.crowdedness + '%'}">
-              
-            </div>
-          </div>
-        </div> 
-          <ng-container *ngIf="isOpen; else elseTemplate" >
-            <div class="openess openclass">
-                <!-- • Open -->
-            </div>
-          </ng-container>
-          <ng-template #elseTemplate >
-            <div class="openess closedclass">
-                <!-- • Closed -->
-                <!-- <div class="ring-container">
-                    <div class="ringring"></div>
-                    <div class="circle"></div>
-                </div> -->
-            </div>
-          </ng-template>
-      </div>
-      </div>
-    <div class="icon-bar">
+  <div class="text-container">
+    <div class="title">
+      {{ cardInfo.name }}</div>
+    <!-- <div class="subtitle">{{ subtitle }}</div> -->
+    <!-- <div class="icon-bar">
       <mat-icon *ngIf="cardInfo.attraction" aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
       <mat-icon *ngIf="cardInfo.lake" aria-hidden="false" aria-label="Attractions">directions_boat</mat-icon>
       <mat-icon *ngIf="cardInfo.mountain" aria-hidden="false" aria-label="Attractions">landscape</mat-icon>
       <mat-icon *ngIf="cardInfo.museum" aria-hidden="false" aria-label="Attractions">museum</mat-icon>
       <mat-icon *ngIf="cardInfo.viewpoint" aria-hidden="false" aria-label="Attractions">panorama</mat-icon>
-    </div>
+    </div> -->
+    <!-- <div class="crowdedness">
+      <div>
+        <mat-icon aria-hidden="false" aria-label="Attractions">group</mat-icon>
+        <div class="crowdedness-bar">
+          <div class="crowdedness-bar-inner" [ngStyle]="{'width': cardInfo.crowdedness + '%'}">
+
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
-    <app-detail-view *ngIf="showDetails" (onCloseDetails)="onCloseDetails($event)" [cardInfo]="cardInfo" [timeFrom]="timeFrom" [timeTo]="timeTo"></app-detail-view>
+  <button class="show-more">More information</button>
+</div>

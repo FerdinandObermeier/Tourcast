@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FilterService } from '../services/filter.service';
 import { Filters } from '../filters.enum';
+import { MessageService } from '../services/message.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class CardComponent implements OnInit {
   isOpen: boolean = false;
 
   constructor(
-    private filterService: FilterService
+    private filterService: FilterService,
+    private messageService: MessageService
     ) { }
 
   ngOnInit() {
@@ -71,6 +73,13 @@ export class CardComponent implements OnInit {
     }
   }
 
+  onShowDetails() {
+    this.messageService.onSendShowDetails({
+      cardInfo: this.cardInfo,
+      timeFrom: this.timeFrom,
+      timeTo: this.timeTo
+    });
+  }
 
   onCloseDetails(showDetails: boolean) {
     this.showDetails = showDetails;
