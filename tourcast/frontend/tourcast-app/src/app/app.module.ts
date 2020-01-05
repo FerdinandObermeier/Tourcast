@@ -17,8 +17,10 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilterService } from './services/filter.service';
 import { BackendService } from './services/http.service';
-import { HttpClientModule } from '@angular/common/http'; 
-    
+import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+
+
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto'
@@ -35,6 +37,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   ],
   imports: [
     MatButtonModule,
+    MatTabsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,
