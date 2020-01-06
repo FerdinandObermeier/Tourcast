@@ -69,7 +69,6 @@ img{
   left: 0;
   height: 100vh;
   padding: 20px;
-  overflow: scroll;
   z-index: 3;
   width: calc(100% - 40px);
 }
@@ -110,6 +109,11 @@ img{
 
 .info-item mat-icon{
     margin:auto;
+}
+
+.description-container{
+  height: 62vh;
+  overflow: scroll;
 }
 
 .description{
@@ -166,7 +170,7 @@ button{
 
 .chart-bar{
   width: 30px;
-  height: 120px;
+  height: 90px;
   margin:auto;
   border-radius: 5px 5px 0 0;
   background-color: rgba(166, 77, 121, 0.8);
@@ -182,9 +186,4 @@ button{
 
 .chart-time{
   padding: 10px 0;
-}
-
-.placeholder{
-  width: 100%;
-  height: 80px;
 }
