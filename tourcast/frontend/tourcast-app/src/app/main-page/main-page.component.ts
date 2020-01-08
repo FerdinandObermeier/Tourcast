@@ -1,9 +1,6 @@
-import { Component, AfterViewInit, SimpleChanges, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
-import {HttpClient} from '@angular/common/http';
-import { async } from 'q';
 import { BackendService } from '../services/http.service';
-import { TestBed } from '@angular/core/testing';
 import { MessageService } from '../services/message.service';
 
 @Component({
@@ -26,18 +23,19 @@ export class MainPageComponent implements OnInit{
   loading;
 
 
+  allCards;
   cards:any;
 
 
   constructor(
     private backendService: BackendService,
-    private http: HttpClient,
     private messageService: MessageService
   ) {
     this.loading = true;
 
     this.messageService.getHideFilter().subscribe( (data:any) => {
       if(data) {
+        this.cards = this.allCards;
         let filteredCards = [];
         this.cards.filter(element => {
           if (data.showAttractions && element.attraction) {
@@ -57,9 +55,12 @@ export class MainPageComponent implements OnInit{
           }
 
           if (data.onlyFree) {
-            filteredCards = filteredCards.filter(el => el.priceMax = "0.00")
+            filteredCards = filteredCards.filter(el => el.priceMax == "0.00")
           } else {
-            filteredCards = filteredCards.filter(el => el.priceMax < data.priceValue);
+            filteredCards = filteredCards.filter(el => {
+              let price = parseInt(el.priceMax);
+              return price < data.priceValue;
+            });
           }
           if (data.showClosed && !data.showOpened) {
             filteredCards = filteredCards.filter(el => !el.isOpen);
@@ -125,7 +126,6 @@ export class MainPageComponent implements OnInit{
         }
       }
     })
-    console.log(this.cards);
   }
 
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
@@ -136,10 +136,17 @@ export class MainPageComponent implements OnInit{
     // Add 'implements OnInit' to the class.
     this.backendService.getCards().subscribe((data) => {
       let temp: any = data;
-      this.cards = temp.slice(0,9);
+      this.cards = temp;
+      this.allCards = this.cards;
       this.generateTime();
       this.loading = false;
     });
+  }
+
+  ngAfterViewInit(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    console.log("checked");
   }
 
   public config: SwiperConfigInterface = {
@@ -205,7 +212,7 @@ export class MainPageComponent implements OnInit{
 }
 
 
-function weatherBalloon(t:number, long:number, lat:number) {
+async function weatherBalloon(t:number, long:number, lat:number) {
   fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {

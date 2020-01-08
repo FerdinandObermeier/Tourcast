@@ -17,8 +17,6 @@ export class CardComponent implements OnInit {
   showMountains = true;
   showMuseums = true;
   showViewpoints = true;
-  timeFrom: string;
-  timeTo: string;
   isOpen: boolean = false;
 
   constructor(
@@ -52,9 +50,7 @@ export class CardComponent implements OnInit {
 
   onShowDetails() {
     this.messageService.onSendShowDetails({
-      cardInfo: this.cardInfo,
-      timeFrom: this.timeFrom,
-      timeTo: this.timeTo
+      cardInfo: this.cardInfo
     });
   }
 

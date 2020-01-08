@@ -10,8 +10,6 @@ export class DetailViewComponent implements OnInit {
 
   showDetails = false;
   cardInfo;
-  timeFrom;
-  timeTo;
 
   priceTag: any;
   openingTime: any;
@@ -20,8 +18,6 @@ export class DetailViewComponent implements OnInit {
   constructor(private messageService: MessageService) {
     this.messageService.getShowDetails().subscribe((data: any) => {
       this.cardInfo = data.cardInfo;
-      this. timeFrom = data.timeFrom;
-      this.timeTo = data.timeTo;
       this.onCalculateInformation();
       this.showDetails = true;
     });
@@ -36,10 +32,10 @@ export class DetailViewComponent implements OnInit {
     } else {
       this.priceTag = this.cardInfo.priceMin.split('.') + ' - ' + this.cardInfo.priceMax.split('.') + ' €';
     }
-    if (this.timeFrom == '00:00' && this.timeTo == '23:59') {
+    if (this.cardInfo.timeFrom == '00:00' && this.cardInfo.timeTo == '23:59') {
       this.openingTime = 'All Day';
     } else {
-      this.openingTime = this.timeFrom + ' - ' + this.timeTo;
+      this.openingTime = this.cardInfo.timeFrom + ' - ' + this.cardInfo.timeTo;
     }
     this.rating = +this.cardInfo.rating.slice(0,1);
   }

@@ -54,7 +54,7 @@
     .card-container{
         display: flex;
         flex-wrap: wrap;
-        height:calc(100vh - 90px);
+        max-height:calc(100vh - 90px);
         overflow: scroll;
     }
 
@@ -66,7 +66,7 @@
     .swiper-slide {
         /* text-align: center; */
         font-size: 18px;
-        
+
         background: #fff;
         /* Center slide text vertically */
         /* display: -webkit-box;
@@ -91,4 +91,22 @@ mat-spinner{
     margin: 10px auto;
     width: 50px !important;
     height: 50px !important;
+}
+
+.no-cards{
+  width: 80%;
+  margin: 20px auto;
+}
+
+.no-cards img{
+  width: 100%;
+}
+
+.no-cards div{
+  margin: 10px;
+}
+
+.no-cards-text{
+  text-align: center;
+  color: #a64d79;
 }
