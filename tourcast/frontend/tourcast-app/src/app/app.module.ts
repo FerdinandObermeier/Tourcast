@@ -19,6 +19,7 @@ import { FilterService } from './services/filter.service';
 import { BackendService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -38,6 +39,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   imports: [
     MatButtonModule,
     MatTabsModule,
+    MatProgressSpinnerModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,

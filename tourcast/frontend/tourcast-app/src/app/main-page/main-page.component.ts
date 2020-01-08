@@ -11,7 +11,7 @@ import { TestBed } from '@angular/core/testing';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
-  
+
   currentSlide: number = 0;
   public disabled: boolean = false;
   index = 0;
@@ -22,15 +22,16 @@ export class MainPageComponent {
   ipAddress;
   latitude;
   longitude;
+  loading;
 
 
   cards:any; 
 
   
   constructor(
-    private backendService: BackendService,
-    private http: HttpClient
+    private backendService: BackendService
   ) {
+    this.loading = true;
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
      // comment out to disable weather API calls
@@ -60,6 +61,7 @@ export class MainPageComponent {
     this.backendService.getCards().subscribe((data) => {
       let temp: any = data;
       this.cards = temp.slice(0,9);
+      this.loading = false;
     });
   }
 
