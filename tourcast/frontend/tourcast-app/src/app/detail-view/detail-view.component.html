@@ -12,23 +12,23 @@
               <b>{{ cardInfo.name }}</b>
           </div>
           <div class="rating">
-          <mat-icon *ngIf="rating > 0" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-          <mat-icon *ngIf="rating > 1" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-          <mat-icon *ngIf="rating > 2" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-          <mat-icon *ngIf="rating > 3" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-          <mat-icon *ngIf="rating > 4" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-          <mat-icon *ngIf="rating < 1" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-          <mat-icon *ngIf="rating < 2" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-          <mat-icon *ngIf="rating < 3" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-          <mat-icon *ngIf="rating < 4" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-          <mat-icon *ngIf="rating < 5" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
+          <mat-icon *ngIf="rating > 0" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 1" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 2" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 3" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 4" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating < 1" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 2" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 3" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 4" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 5" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
           </div>
           <mat-tab-group>
             <mat-tab label="General Information">
               <div class="info">
                   <div class="info-item">
                       <div>
-                          <mat-icon aria-hidden="false" aria-label="Attractions">money</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="money">money</mat-icon>
                       </div>
                       <div>
                         <div><b>Pricing</b></div>
@@ -39,7 +39,7 @@
                   </div>
                   <div class="info-item" (click)="onOpenLink(cardInfo.mapsURL)">
                       <div>
-                          <mat-icon aria-hidden="false" aria-label="Attractions">directions</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="directions">directions</mat-icon>
                       </div>
                       <div>
                         <div><b>Navigation</b></div>
@@ -48,7 +48,7 @@
                   </div>
                   <div class="info-item">
                       <div>
-                          <mat-icon aria-hidden="false" aria-label="Attractions">access_time</mat-icon>
+                          <mat-icon aria-hidden="false" aria-label="accessTime">access_time</mat-icon>
                       </div>
                       <div>
                         <div><b>Opening Hours</b></div>
@@ -60,7 +60,7 @@
               </div>
               <div class="crowdedness">
                 <div>
-                  <mat-icon aria-hidden="false" aria-label="Attractions">group</mat-icon>
+                  <mat-icon aria-hidden="false" aria-label="group">group</mat-icon>
                 </div>
                 <div class="chart">
                   <div class="chart-item">

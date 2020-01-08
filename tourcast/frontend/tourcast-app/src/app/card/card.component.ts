@@ -102,17 +102,17 @@ export class CardComponent implements OnInit {
     hoursTo = parseInt(this.timeTo.substr(0,2));
     minutesTo = parseInt(this.timeTo.substr(3,4));
 
-    // console.log(hoursTo);
-    // console.log(hoursFrom);
-    // console.log(nowHours);
-
-    if (hoursFrom < nowHours) {
-      if (nowHours < hoursTo) {
-        if (minutesFrom < nowMinutes) {
-          if (nowMinutes < minutesTo) {
-            this.isOpen = true;
-          }
-        }
+    if (hoursFrom < nowHours && nowHours < hoursTo) {
+      this.isOpen = true;
+    }
+    if (hoursFrom = nowHours) {
+      if (minutesFrom < nowMinutes) {
+        this.isOpen = true;
+      }
+    }
+    if (hoursTo = nowHours) {
+      if (nowMinutes < minutesTo) {
+        this.isOpen = true;
       }
     }
   }

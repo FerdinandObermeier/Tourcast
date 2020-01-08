@@ -1,26 +1,48 @@
 <div class="filter-wrapper">
-    <div class="inner-wrapper">
-        <div class="pointer"></div>
-        <div class="pointer-inner"></div>
-        <div class="filter-element" [ngClass]="{'active': showAttractions}" (click)="toggleFilter(0)">
-            <mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon>
-            Attractions
-        </div>
-        <div class="filter-element" [ngClass]="{'active': showLakes}" (click)="toggleFilter(1)">
-            <mat-icon aria-hidden="false" aria-label="Lakes">directions_boat</mat-icon>
-            Lakes
-        </div>
-        <div class="filter-element" [ngClass]="{'active': showMountains}" (click)="toggleFilter(2)">
-            <mat-icon aria-hidden="false" aria-label="Mountains">landscape</mat-icon>
-            Mountains
-        </div>
-        <div class="filter-element" [ngClass]="{'active': showMuseums}" (click)="toggleFilter(3)">
-            <mat-icon aria-hidden="false" aria-label="Museums">museum</mat-icon>
-            Museums
-        </div>
-        <div class="filter-element" [ngClass]="{'active': showViewpoints}" (click)="toggleFilter(4)" style="border-bottom: none;">
-            <mat-icon aria-hidden="false" aria-label="Viewpoints">panorama</mat-icon>
-            Viewpoints
-        </div>
+  <div class="title">FILTER ATTRACTIONS</div>
+  <div class="filter-group">
+    <div class="filter-title">Type of Attraction</div>
+    <div class="filter-button" [ngClass]="{'filter-button-active': showAttractions}" (click)="showAttractions = !showAttractions">
+      <div class="button-icon"><mat-icon aria-hidden="false" aria-label="Attractions">local_activity</mat-icon></div>
+      <div class="button-label">Attractions</div>
     </div>
+    <div class="filter-button" [ngClass]="{'filter-button-active': showLakes}" (click)="showLakes = !showLakes">
+      <div class="button-icon"><mat-icon aria-hidden="false" aria-label="Lakes">directions_boat</mat-icon></div>
+      <div class="button-label">Lakes</div>
+    </div>
+    <div class="filter-button" [ngClass]="{'filter-button-active': showMountains}" (click)="showMountains = !showMountains">
+      <div class="button-icon"><mat-icon aria-hidden="false" aria-label="Mountains">landscape</mat-icon></div>
+      <div class="button-label">Mountains</div>
+    </div>
+    <div class="filter-button" [ngClass]="{'filter-button-active': showMuseums}" (click)="showMuseums = !showMuseums">
+      <div class="button-icon"><mat-icon aria-hidden="false" aria-label="Museums">museum</mat-icon></div>
+      <div class="button-label">Museums</div>
+    </div>
+    <div class="filter-button" [ngClass]="{'filter-button-active': showViewpoints}" (click)="showViewpoints = !showViewpoints">
+      <div class="button-icon"><mat-icon aria-hidden="false" aria-label="Viewpoints">panorama</mat-icon></div>
+      <div class="button-label">Viewpoints</div>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-title">Price</div>
+    <mat-slider
+        max="100"
+        min="0"
+        thumbLabel="true"
+        tickInterval="10"
+        step=1
+        [(ngModel)]="priceValue">
+    </mat-slider>
+    <div style="margin: 5px 0;">Show attractions from 0€ to {{priceValue}}€.</div>
+    <mat-checkbox [(ngModel)]="onlyFree">Only show free attractions</mat-checkbox>
+  </div>
+  <div class="filter-group">
+    <div class="filter-title">Opening hours</div>
+    <mat-checkbox [(ngModel)]="showOpened">Currently opened attractions.</mat-checkbox>
+    <mat-checkbox [(ngModel)]="showClosed">Currently closed attractions.</mat-checkbox>
+  </div>
+  <div class="filter-group">
+    <button (click)="onHideFilter()">Cancel</button>
+    <button (click)="onFilter()" class="filter">Filter</button>
+  </div>
 </div>
