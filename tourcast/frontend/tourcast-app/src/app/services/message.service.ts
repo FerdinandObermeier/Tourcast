@@ -8,6 +8,8 @@ export class MessageService {
 
   private showDetails = new Subject();
 
+  private hideFilter = new Subject();
+
   constructor() { }
 
   onSendShowDetails(data) {
@@ -16,5 +18,14 @@ export class MessageService {
 
   getShowDetails() {
      return this.showDetails.asObservable();
+  }
+
+
+  onSendHideFilter(data?) {
+    this.hideFilter.next(data);
+  }
+
+  getHideFilter() {
+    return this.hideFilter.asObservable();
   }
 }

@@ -1,17 +1,18 @@
-import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, SimpleChanges, ViewChild, OnInit } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
 import {HttpClient} from '@angular/common/http';
 import { async } from 'q';
 import { BackendService } from '../services/http.service';
 import { TestBed } from '@angular/core/testing';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent {
-  
+export class MainPageComponent implements OnInit{
+
   currentSlide: number = 0;
   public disabled: boolean = false;
   index = 0;
@@ -24,19 +25,55 @@ export class MainPageComponent {
   longitude;
 
 
-  cards:any; 
+  cards:any;
 
-  
+
   constructor(
     private backendService: BackendService,
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService: MessageService
   ) {
+
+    this.messageService.getHideFilter().subscribe( (data:any) => {
+      debugger;
+      if(data) {
+        let filteredCards = [];
+        this.cards.filter(element => {
+          if (data.showAttractions && element.attraction) {
+            filteredCards.push(element);
+          }
+          if (data.showLakes && element.lake && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+          if (data.showMountains && element.mountain && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+          if (data.showMuseums && element.museum && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+          if (data.showViewpoints && element.viewpoint && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+
+          if (data.onlyFree) {
+            filteredCards = filteredCards.filter(el => el.priceMax = "0.00")
+          } else {
+            filteredCards = filteredCards.filter(el => el.priceMax < data.priceValue);
+          }
+          if (data.showClosed) {
+            // filteredCards = filteredCards.filter(el => el.openingHoursFrom < Date.now && el.openingHoursTo > Date.now)
+          }
+        });
+        this.cards = filteredCards;
+      }
+    })
+
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
      // comment out to disable weather API calls
     /*this.http.get<{ip:string}>('https://jsonip.com')
     .subscribe( (data) => {
-      
+
       console.log('th data', data);
       this.ipAddress = data.ip;
       this.http.get('https://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
@@ -44,19 +81,19 @@ export class MainPageComponent {
         console.log(data);
         this.latitude = data.latitude;
         this.longitude= data.longitude;
-       
-      }); 
-      
+
+      });
+
     });*/
     weatherBalloon(this.index, this.longitude, this.latitude);
   }
-  
+
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
   ngOnInit() {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    // Add 'implements OnInit' to the class.
     this.backendService.getCards().subscribe((data) => {
       let temp: any = data;
       this.cards = temp.slice(0,9);
@@ -64,10 +101,10 @@ export class MainPageComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
+    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    // Add '${implements OnChanges}' to the class.
   }
-  
+
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
     slidesPerView: 1,
@@ -93,7 +130,7 @@ export class MainPageComponent {
 
   public onIndexChange(index: number) {
     this.currentSlide = index;
-    
+
     weatherBalloon(index,  this.longitude, this.latitude);
   }
 
@@ -106,11 +143,11 @@ export class MainPageComponent {
     return this.days[(currentDay + offset) % 7];
   }
 
-  
+
   /*weatherBalloon() {
     var key = '{yourkey}';
     var t = this.index;
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
     .then(function(resp) { return resp.json() }) // Convert data to json
     .then(function(data) {
       console.log(data);
@@ -131,13 +168,13 @@ export class MainPageComponent {
 }
 
 
-function weatherBalloon(t:number, long:number, lat:number) { 
-  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
+function weatherBalloon(t:number, long:number, lat:number) {
+  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
   .then(function(resp) { return resp.json() }) // Convert data to json
   .then(function(data) {
     var i;
     var iconName;
-    
+
     if(t==0){
       i= data.list[0].main.temp;
       iconName=data.list[0].weather[0].main;
@@ -150,7 +187,7 @@ function weatherBalloon(t:number, long:number, lat:number) {
     else{
       i= i= data.list[15].main.temp;
       iconName=data.list[15].weather[0].main;
-      
+
     }
     document.getElementById('temperature').innerHTML=' '+i + '°C';
     setIcon(iconName);
@@ -182,8 +219,7 @@ function weatherBalloon(t:number, long:number, lat:number) {
       elem.classList.remove(elem.classList[1]);
     }
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
-    
+
     return;
   }
- 
- 
+
