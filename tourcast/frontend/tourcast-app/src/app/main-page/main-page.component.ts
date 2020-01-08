@@ -35,7 +35,6 @@ export class MainPageComponent implements OnInit{
   ) {
 
     this.messageService.getHideFilter().subscribe( (data:any) => {
-      debugger;
       if(data) {
         let filteredCards = [];
         this.cards.filter(element => {
@@ -60,8 +59,11 @@ export class MainPageComponent implements OnInit{
           } else {
             filteredCards = filteredCards.filter(el => el.priceMax < data.priceValue);
           }
-          if (data.showClosed) {
-            // filteredCards = filteredCards.filter(el => el.openingHoursFrom < Date.now && el.openingHoursTo > Date.now)
+          if (data.showClosed && !data.showOpened) {
+            filteredCards = filteredCards.filter(el => !el.isOpen);
+          }
+          if (data.showOpened && !data.showClosed) {
+            filteredCards = filteredCards.filter(el => el.isOpen);
           }
         });
         this.cards = filteredCards;
@@ -88,6 +90,42 @@ export class MainPageComponent implements OnInit{
     weatherBalloon(this.index, this.longitude, this.latitude);
   }
 
+
+  generateTime() {
+    this.cards.forEach((card,index) => {
+      let hoursFrom, minutesFrom, hoursTo, minutesTo, temp;
+      let nowHours = new Date().getHours();
+      let nowMinutes = new Date().getMinutes();
+
+      temp = card.openingHoursFrom.substr(11);
+      temp = temp.substr(0,5);
+      this.cards[index].timeFrom = temp;
+      temp = card.openingHoursTo.substr(11);
+      temp = temp.substr(0,5);
+      this.cards[index].timeTo = temp;
+
+      hoursFrom = parseInt(this.cards[index].timeFrom.substr(0,2));
+      minutesFrom = parseInt(this.cards[index].timeFrom.substr(3,4));
+      hoursTo = parseInt(this.cards[index].timeTo.substr(0,2));
+      minutesTo = parseInt(this.cards[index].timeTo.substr(3,4));
+
+      if (hoursFrom < nowHours && nowHours < hoursTo) {
+        this.cards[index].isOpen = true;
+      }
+      if (hoursFrom = nowHours) {
+        if (minutesFrom < nowMinutes) {
+          this.cards[index].isOpen = true;
+        }
+      }
+      if (hoursTo = nowHours) {
+        if (nowMinutes < minutesTo) {
+          this.cards[index].isOpen = true;
+        }
+      }
+    })
+    console.log(this.cards);
+  }
+
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
@@ -97,12 +135,8 @@ export class MainPageComponent implements OnInit{
     this.backendService.getCards().subscribe((data) => {
       let temp: any = data;
       this.cards = temp.slice(0,9);
+      this.generateTime();
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    // Add '${implements OnChanges}' to the class.
   }
 
   public config: SwiperConfigInterface = {
@@ -221,5 +255,4 @@ function weatherBalloon(t:number, long:number, lat:number) {
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
 
     return;
-  }
-
+}

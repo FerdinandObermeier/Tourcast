@@ -1,8 +1,8 @@
 <div class="card" *ngIf="showAttractions && cardInfo.attraction || showLakes && cardInfo.lake || showMountains && cardInfo.mountain || showMuseums && cardInfo.museum || showViewpoints && cardInfo.viewpoint" (click)="onShowDetails()">
   <div class="openess-indicator">
     <div class="ring-container">
-        <div [ngClass]="{'ringring-open': isOpen, 'ringring-close': !isOpen}"></div>
-        <div [ngClass]="{'circle-open': isOpen, 'circle-close': !isOpen}"></div>
+        <div [ngClass]="{'ringring-open': cardInfo.isOpen, 'ringring-close': !cardInfo.isOpen}"></div>
+        <div [ngClass]="{'circle-open': cardInfo.isOpen, 'circle-close': !cardInfo.isOpen}"></div>
     </div>
   </div>
   <div class="image-container">

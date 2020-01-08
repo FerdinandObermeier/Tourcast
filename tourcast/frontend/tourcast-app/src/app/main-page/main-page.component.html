@@ -12,6 +12,9 @@
         <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
           <div class="swiper-slide">
             <div class="card-container">
+              <div *ngIf="cards === undefined || cards.length===0" >
+                <object data="/src/assets/weather_woman.svg" type="image/svg"></object>
+              </div>
               <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
             </div>
           </div>
