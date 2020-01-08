@@ -19,3 +19,14 @@ body { margin-top: 90px; font-family: 'Comfortaa', serif; }
 .mat-checkbox-frame{
   border-color: #a64d79;
 }
+
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #a64d79;
+}
+
+
+.mat-progress-spinner svg, .mat-spinner svg{
+    width: 50px !important;
+    height: 50px !important;
+}

@@ -83,4 +83,12 @@
         align-items: center; */
     }
 
+.spinner-container{
+    width: 100%;
+}
 
+mat-spinner{
+    margin: 10px auto;
+    width: 50px !important;
+    height: 50px !important;
+}

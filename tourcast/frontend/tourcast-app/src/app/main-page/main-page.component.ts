@@ -23,6 +23,7 @@ export class MainPageComponent implements OnInit{
   ipAddress;
   latitude;
   longitude;
+  loading;
 
 
   cards:any;
@@ -33,6 +34,7 @@ export class MainPageComponent implements OnInit{
     private http: HttpClient,
     private messageService: MessageService
   ) {
+    this.loading = true;
 
     this.messageService.getHideFilter().subscribe( (data:any) => {
       if(data) {
@@ -136,6 +138,7 @@ export class MainPageComponent implements OnInit{
       let temp: any = data;
       this.cards = temp.slice(0,9);
       this.generateTime();
+      this.loading = false;
     });
   }
 
