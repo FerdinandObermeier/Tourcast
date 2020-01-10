@@ -134,19 +134,17 @@ export class MainPageComponent implements OnInit{
   ngOnInit() {
     // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     // Add 'implements OnInit' to the class.
-    this.backendService.getCards().subscribe((data) => {
+    this.getCards();
+  }
+
+  async getCards() {
+    this.backendService.get('cards').then((data) => {
       let temp: any = data;
       this.cards = temp;
       this.allCards = this.cards;
       this.generateTime();
       this.loading = false;
     });
-  }
-
-  ngAfterViewInit(): void {
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
-    console.log("checked");
   }
 
   public config: SwiperConfigInterface = {

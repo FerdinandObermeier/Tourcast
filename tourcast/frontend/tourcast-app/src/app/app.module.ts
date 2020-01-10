@@ -23,6 +23,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ChartsModule } from 'ng2-charts';
+import { WeatherDetailComponent } from './weather-detail/weather-detail.component';
 
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
@@ -37,22 +39,24 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     MainPageComponent,
     DetailViewComponent,
     FilterComponent,
-    CardComponent
+    CardComponent,
+    WeatherDetailComponent
   ],
   imports: [
     MatButtonModule,
-    MatSliderModule,
     MatTabsModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
     BrowserModule,
     BrowserAnimationsModule,
+    MatSliderModule,
     MatIconModule,
     MatCardModule,
     SwiperModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [
     {
