@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from '../services/message.service';
+import { BackendService } from '../services/http.service';
 
 
 
@@ -14,13 +15,20 @@ export class NavBarComponent implements OnInit {
   sunny = true;
   cloudy = false;
   showFilter = false;
+  showWeatherDetail = false;
+  weatherData;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private backendService: BackendService) {
     this.messageService.getHideFilter().subscribe(() => this.showFilter = false);
+    this.getWeather();
     //this.weatherBalloon();
   }
 
   ngOnInit() {
+  }
+
+  async getWeather() {
+    this.backendService.get('weather').then(data => this.weatherData = data);
   }
 
   /*weatherBalloon() {

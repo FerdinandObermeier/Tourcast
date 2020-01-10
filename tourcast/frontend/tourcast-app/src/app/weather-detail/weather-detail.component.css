@@ -1,0 +1,45 @@
+mat-icon{
+  position: fixed;
+  z-index: 600;
+  top: 40px;
+  left: 50%;
+  animation: rotate 0.3s ease-in;
+  color: #a64d79;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.weather-container{
+  position: fixed;
+  z-index: 550;
+  background-color: white;
+  top: 60px;
+  left: 0;
+  border-top: 2px solid #a64d79;
+  border-bottom: 2px solid #a64d79;
+  width: 100vw;
+  height: 100vw;
+  animation: top 0.3s ease-in;
+}
+
+@keyframes top {
+  from {
+    top: -400px;
+  }
+  to {
+    top: 60px;
+  }
+}
+
+.chart-container{
+  width: 100vw;
+  height: 100vw;
+  margin: auto;
+}
