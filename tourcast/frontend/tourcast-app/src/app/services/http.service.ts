@@ -12,6 +12,7 @@ export class BackendService {
     baseUrl = 'https://tourcast-backend.herokuapp.com/';
 
   public get(url) {
-    return this.httpClient.get(this.baseUrl + url).toPromise();
+    return this.httpClient.get(this.baseUrl + url).toPromise().catch(err => console.log(err));
+    ;
   }
 }
