@@ -75,22 +75,8 @@ export class MainPageComponent implements OnInit{
 
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
-     // comment out to disable weather API calls
-    /*this.http.get<{ip:string}>('https://jsonip.com')
-    .subscribe( (data) => {
 
-      console.log('th data', data);
-      this.ipAddress = data.ip;
-      this.http.get('https://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
-      .subscribe( (data: any)=>{
-        console.log(data);
-        this.latitude = data.latitude;
-        this.longitude= data.longitude;
-
-      });
-
-    });*/
-    weatherBalloon(this.index, this.longitude, this.latitude);
+    this.weatherBalloon(this.index, this.longitude, this.latitude);
   }
 
 
@@ -138,13 +124,15 @@ export class MainPageComponent implements OnInit{
   }
 
   async getCards() {
-    this.backendService.get('cards').then((data) => {
-      let temp: any = data;
-      this.cards = temp;
-      this.allCards = this.cards;
-      this.generateTime();
-      this.loading = false;
-    });
+    this.backendService.get('cards')
+      .then((data) => {
+        const temp: any = data;
+        this.cards = temp;
+        this.allCards = this.cards;
+        this.generateTime();
+        this.loading = false;
+      })
+      .catch(err => console.log(err));
   }
 
   public config: SwiperConfigInterface = {
@@ -174,7 +162,7 @@ export class MainPageComponent implements OnInit{
     this.currentSlide = index;
     this.messageService.onSendCurrentSlide(this.currentSlide);
 
-    weatherBalloon(index,  this.longitude, this.latitude);
+    this.weatherBalloon(index,  this.longitude, this.latitude);
   }
 
   goToSlideNumber(slide: number){
@@ -187,61 +175,39 @@ export class MainPageComponent implements OnInit{
   }
 
 
-  /*weatherBalloon() {
-    var key = '{yourkey}';
-    var t = this.index;
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
-    .then(function(resp) { return resp.json() }) // Convert data to json
-    .then(function(data) {
-      console.log(data);
-      var act=0;
+  async weatherBalloon(t:number, long:number, lat:number) {
+    let that = this;
+    // fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
+    this.backendService.get('weather')
+    // .then(function(resp) { return resp.json() }) // Convert data to json
+    .then(function(data:any) {
+      var i;
+      var iconName;
+
       if(t==0){
-        act=data.main.temp;
+        i= data.list[0].main.temp;
+        iconName=data.list[0].weather[0].main;
+
       }
       else if(t==1){
-        act=1;
+        i= data.list[7].main.temp;
+        iconName=data.list[7].weather[0].main;
       }
-      document.getElementById('temperature').innerHTML=' '+act + '°C';
+      else{
+        i= i= data.list[15].main.temp;
+        iconName=data.list[15].weather[0].main;
+
+      }
+      document.getElementById('temperature').innerHTML=' '+i + '°C';
+      that.setIcon(iconName);
     })
     .catch(function() {
       // catch any errors
     });
-  }+ lat+ '&lon='+long+
-*/
-}
+  }
 
-
-async function weatherBalloon(t:number, long:number, lat:number) {
-  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
-  .then(function(resp) { return resp.json() }) // Convert data to json
-  .then(function(data) {
-    var i;
-    var iconName;
-
-    if(t==0){
-      i= data.list[0].main.temp;
-      iconName=data.list[0].weather[0].main;
-
-    }
-    else if(t==1){
-      i= data.list[7].main.temp;
-      iconName=data.list[7].weather[0].main;
-    }
-    else{
-      i= i= data.list[15].main.temp;
-      iconName=data.list[15].weather[0].main;
-
-    }
-    document.getElementById('temperature').innerHTML=' '+i + '°C';
-    setIcon(iconName);
-  })
-  .catch(function() {
-    // catch any errors
-  });
-}
-
- function setIcon(iconName: String){
-   var iconNameFA;
+  setIcon(iconName: string){
+    var iconNameFA;
     if(iconName==='Clear'){
       iconNameFA='fa-sun'
     }
@@ -264,4 +230,5 @@ async function weatherBalloon(t:number, long:number, lat:number) {
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
 
     return;
+  }
 }
