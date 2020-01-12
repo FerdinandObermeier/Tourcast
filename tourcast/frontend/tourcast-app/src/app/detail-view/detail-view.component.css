@@ -165,25 +165,25 @@ button{
 
 .chart{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(12, 1fr);
 }
 
 .chart-bar{
-  width: 30px;
+  width: 29px;
   height: 90px;
   margin:auto;
   border-radius: 5px 5px 0 0;
-  background-color: rgba(166, 77, 121, 0.8);
+  background-color: rgb(237,219,228);
 }
 
 .chart-item{
   display: grid;
   grid-template-rows: 80% 20%;
   text-align: center;
-  padding: 5px;
   font-size: 0.8em;
 }
 
 .chart-time{
   padding: 10px 0;
+  font-size: 0.8em;
 }

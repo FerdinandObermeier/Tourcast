@@ -14,6 +14,7 @@ export class DetailViewComponent implements OnInit {
   priceTag: any;
   openingTime: any;
   rating: any;
+  currentTime;
 
   constructor(private messageService: MessageService) {
     this.messageService.getShowDetails().subscribe((data: any) => {
@@ -21,6 +22,9 @@ export class DetailViewComponent implements OnInit {
       this.onCalculateInformation();
       this.showDetails = true;
     });
+
+    this.currentTime = new Date().getHours();
+    console.log(this.currentTime);
   }
 
   ngOnInit() {
