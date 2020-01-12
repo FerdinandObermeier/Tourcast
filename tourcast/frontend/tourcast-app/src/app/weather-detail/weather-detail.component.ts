@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { MessageService } from '../services/message.service';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-weather-detail',
@@ -58,23 +59,42 @@ export class WeatherDetailComponent implements OnInit {
 
 
   currentSlide = 0;
+  icons = [];
 
   constructor(private messageService: MessageService) {
     this.messageService.getCurrentSlide().subscribe(index => this.currentSlide = index);
   }
 
   ngOnInit() {
+    this.setChartData();
+    
+  }
 
-    let weatherDataArrayCounter = this.currentSlide === 0 ? 8 : this.currentSlide === 1 ? 16 : 24;
+  setChartData() {
+    const weatherDataArrayCounter = this.currentSlide === 0 ? 8 : this.currentSlide === 1 ? 16 : 24;
 
-    let chartData = [];
-    let chartLabels = [];
-    for(let i = weatherDataArrayCounter - 8; i < weatherDataArrayCounter; i++) {
+    const chartData = [];
+    const chartLabels = [];
+    for (let i = weatherDataArrayCounter - 8; i < weatherDataArrayCounter; i++) {
       chartData.push(this.weatherData.list[i].main.temp);
       chartLabels.push(this.weatherData.list[i].dt_txt.substring(11, 16));
+      this.icons.push(this.getIcon(this.weatherData.list[i].weather[0].main));
     }
     this.lineChartData[0].data = chartData;
     this.lineChartLabels = chartLabels;
   }
 
+  getIcon(iconName: string) {
+    if (iconName === 'Clear') {
+      return 'fa-sun';
+    } else if (iconName === 'Snow') {
+      return 'fa-snowflake';
+    } else if (iconName === 'Rain') {
+      return 'fa-cloud-showers-heavy';
+    } else if (iconName === 'Clouds') {
+      return 'fa-cloud';
+    } else if (iconName === 'Thunderstorm') {
+      return 'fa-bolt';
+    }
+  }
 }

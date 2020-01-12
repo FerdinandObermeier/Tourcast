@@ -1,21 +1,3 @@
-mat-icon{
-  position: fixed;
-  z-index: 600;
-  top: 40px;
-  left: 50%;
-  animation: rotate 0.3s ease-in;
-  color: #a64d79;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(180deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-
 .weather-container{
   position: fixed;
   z-index: 550;
@@ -25,8 +7,8 @@ mat-icon{
   border-top: 2px solid #a64d79;
   border-bottom: 2px solid #a64d79;
   width: 100vw;
-  height: 100vw;
-  animation: top 0.3s ease-in;
+  height: auto;
+  animation: top 0.3s ease-in-out;
 }
 
 @keyframes top {
@@ -42,4 +24,21 @@ mat-icon{
   width: 100vw;
   height: 100vw;
   margin: auto;
+}
+
+.icons-container {
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  width: 94%;
+  margin-left: 6%;
+  margin-bottom: 10px;
+}
+
+.icons-container div{
+  flex: 1 1 auto;
+  text-align: center;
+  color: #a64d79;
 }

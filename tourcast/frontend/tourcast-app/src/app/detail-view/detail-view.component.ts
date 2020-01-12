@@ -24,7 +24,6 @@ export class DetailViewComponent implements OnInit {
     });
 
     this.currentTime = new Date().getHours();
-    console.log(this.currentTime);
   }
 
   ngOnInit() {

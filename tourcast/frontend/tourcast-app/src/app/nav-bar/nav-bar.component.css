@@ -17,3 +17,17 @@
 .navbar span{
     font-size: 20px;;
 }
+
+#weatherDetail{
+    position: fixed;
+    z-index: 600;
+    top: 40px;
+    left: 50%;
+    color: #a64d79;
+    transform: rotate(0deg);
+    transition: all 0.3s ease-in-out;
+}
+
+.rotate{
+    transform: rotate(180deg) !important;
+}
