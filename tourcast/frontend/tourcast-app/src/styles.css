@@ -8,7 +8,8 @@ html, body {
 }
 body { margin-top: 90px; font-family: 'Comfortaa', serif; }
 
-.mat-slider-thumb, .mat-slider-track-fill, .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-slider-thumb-label, .mat-tab-group.mat-primary .mat-ink-bar{
+.mat-slider-thumb, .mat-slider-track-fill, .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-slider-thumb-label,
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element{
   background-color: #a64d79 !important;
 }
 
