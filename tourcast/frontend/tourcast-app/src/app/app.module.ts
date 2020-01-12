@@ -16,7 +16,6 @@ import { FormsModule } from '@angular/forms';
 import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FilterService } from './services/filter.service';
 import { BackendService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -63,7 +62,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,
     },
-    FilterService,
     BackendService,
   ],
   bootstrap: [AppComponent]

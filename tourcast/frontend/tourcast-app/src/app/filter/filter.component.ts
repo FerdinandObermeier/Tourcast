@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FilterService } from '../services/filter.service';
 import { Filters } from '../filters.enum';
 import { MessageService } from '../services/message.service';
 import { Subscription } from 'rxjs';
@@ -9,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent {
 
   showAttractions = false;
   showLakes = false;
@@ -23,7 +22,6 @@ export class FilterComponent implements OnInit {
   subscription: Subscription;
 
   constructor(
-    private filterService: FilterService,
     private messageService: MessageService
   ) {
     this.subscription = this.messageService.getHideFilter().subscribe( data => {
@@ -49,50 +47,12 @@ export class FilterComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    // this.filterService.filterChange.subscribe(({filterType, value}) => {
-    //   switch (filterType) {
-    //     case Filters.Attractions:
-    //       this.showAttractions = value;
-    //       break;
-    //     case Filters.Lakes:
-    //         this.showLakes = value;
-    //       break;
-    //     case Filters.Mountains:
-    //         this.showMountains = value;
-    //       break;
-    //     case Filters.Museums:
-    //       this.showMuseums = value;
-    //       break;
-    //     case Filters.Viewpoints:
-    //       this.showViewpoints = value;
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // });
-    // this.filterService.getCurrentFilters();
-  }
-
-  toggleFilter(filterType: Filters) {
-    this.filterService.toggle(filterType);
-  }
 
   onHideFilter() {
     this.messageService.onSendHideFilter();
   }
 
   onFilter() {
-    //if any value has been changed, create filter data
-    // if (this.showAttractions !== false ||
-    //   this.showLakes !== false ||
-    //   this.showMountains !== false ||
-    //   this.showMuseums !== false ||
-    //   this.showViewpoints !== false ||
-    //   this.showClosed !== true ||
-    //   this.showOpened !== true ||
-    //   this.onlyFree !== false ||
-    //   this.priceValue !== 100) {
         if (!this.showAttractions && !this.showLakes && !this.showMountains && !this.showMuseums && !this.showViewpoints) {
           this.showAttractions = true;
           this.showLakes = true;
@@ -112,9 +72,6 @@ export class FilterComponent implements OnInit {
           showOpened: this.showOpened,
         };
         this.messageService.onSendHideFilter(data);
-    // } else {
-    //   this.messageService.onSendHideFilter(null);
-    // }
   }
 
   ngOnDestroy(): void {
