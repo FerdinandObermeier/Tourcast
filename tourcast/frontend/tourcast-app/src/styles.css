@@ -31,3 +31,7 @@ body { margin-top: 90px; font-family: 'Comfortaa', serif; }
     width: 50px !important;
     height: 50px !important;
 }
+
+.mat-slider-thumb-label-text{
+  color: #eddbe4 !important;
+}
