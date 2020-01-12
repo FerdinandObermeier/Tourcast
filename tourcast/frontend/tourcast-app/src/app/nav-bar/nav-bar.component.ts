@@ -31,6 +31,13 @@ export class NavBarComponent implements OnInit {
     this.backendService.get('weather').then(data => this.weatherData = data);
   }
 
+  async onToggleWeatherDetail() {
+    if (!this.showWeatherDetail) {
+      await this.getWeather();
+    }
+    this.showWeatherDetail = !this.showWeatherDetail;
+  }
+
   /*weatherBalloon() {
     var key = '{yourkey}';
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')

@@ -10,6 +10,8 @@ export class MessageService {
 
   private hideFilter = new BehaviorSubject(null);
 
+  private currentSlide = new BehaviorSubject(0);
+
   constructor() { }
 
   onSendShowDetails(data) {
@@ -27,5 +29,14 @@ export class MessageService {
 
   getHideFilter() {
     return this.hideFilter.asObservable();
+  }
+
+
+  onSendCurrentSlide(index: number) {
+    this.currentSlide.next(index);
+  }
+
+  getCurrentSlide() {
+    return this.currentSlide.asObservable();
   }
 }

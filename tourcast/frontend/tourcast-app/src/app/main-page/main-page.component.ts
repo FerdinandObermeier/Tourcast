@@ -172,6 +172,7 @@ export class MainPageComponent implements OnInit{
 
   public onIndexChange(index: number) {
     this.currentSlide = index;
+    this.messageService.onSendCurrentSlide(this.currentSlide);
 
     weatherBalloon(index,  this.longitude, this.latitude);
   }
