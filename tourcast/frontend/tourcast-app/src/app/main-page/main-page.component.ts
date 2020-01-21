@@ -1,30 +1,52 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
-import { BackendService } from '../services/http.service';
-import { MessageService } from '../services/message.service';
+import { Component, ViewChild, OnInit } from "@angular/core";
+import {
+  SwiperConfigInterface,
+  SwiperComponent,
+  SwiperDirective
+} from "ngx-swiper-wrapper";
+import { BackendService } from "../services/http.service";
+import { MessageService } from "../services/message.service";
 
+/**
+ * @ignore
+ */
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css']
+  selector: "app-main-page",
+  templateUrl: "./main-page.component.html",
+  styleUrls: ["./main-page.component.css"]
 })
-export class MainPageComponent implements OnInit{
-
-  currentSlide: number = 0;
-  public disabled: boolean = false;
+export class MainPageComponent implements OnInit {
+  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
+  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+  currentSlide = 0;
+  public disabled = false;
   index = 0;
   private today = new Date();
   private currentDay;
   uebermorgen;
-  private days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  private days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
   ipAddress;
-  latitude;
-  longitude;
   loading;
-
-
   allCards;
-  cards:any;
+  cards: any;
+
+  public config: SwiperConfigInterface = {
+    direction: 'horizontal',
+    slidesPerView: 1,
+    keyboard: true,
+    mousewheel: false,
+    scrollbar: false,
+    navigation: false,
+    pagination: false
+  };
 
 
   constructor(
@@ -33,99 +55,125 @@ export class MainPageComponent implements OnInit{
   ) {
     this.loading = true;
 
-    this.messageService.getHideFilter().subscribe( (data:any) => {
-      if(data) {
-        this.cards = this.allCards;
-        let filteredCards = [];
-        this.cards.filter(element => {
-          if (data.showAttractions && element.attraction) {
-            filteredCards.push(element);
-          }
-          if (data.showLakes && element.lake && !filteredCards.includes(element)) {
-            filteredCards.push(element);
-          }
-          if (data.showMountains && element.mountain && !filteredCards.includes(element)) {
-            filteredCards.push(element);
-          }
-          if (data.showMuseums && element.museum && !filteredCards.includes(element)) {
-            filteredCards.push(element);
-          }
-          if (data.showViewpoints && element.viewpoint && !filteredCards.includes(element)) {
-            filteredCards.push(element);
-          }
-
-          if (data.onlyFree) {
-            filteredCards = filteredCards.filter(el => el.priceMax == "0.00")
-          } else {
-            filteredCards = filteredCards.filter(el => {
-              let price = parseInt(el.priceMax);
-              return price < data.priceValue;
-            });
-          }
-          if (data.showClosed && !data.showOpened) {
-            filteredCards = filteredCards.filter(el => !el.isOpen);
-          }
-          if (data.showOpened && !data.showClosed) {
-            filteredCards = filteredCards.filter(el => el.isOpen);
-          }
-        });
-        this.cards = filteredCards;
+    this.messageService.getHideFilter().subscribe((data: any) => {
+      if (data) {
+        this.filterCards(data);
       }
-    })
+    });
 
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
 
-    this.weatherBalloon(this.index, this.longitude, this.latitude);
+    this.getWeather(this.index);
   }
 
+  ngOnInit() {
+    this.getCards();
+  }
 
+  /**
+   * @param data The data to filter for
+   * 
+   * This function filters all cards for the selected filter criteria
+   */
+  filterCards(data: any) {
+    this.cards = this.allCards;
+    let filteredCards = [];
+    this.cards.filter(element => {
+      if (data.showAttractions && element.attraction) {
+        filteredCards.push(element);
+      }
+      if (
+        data.showLakes &&
+        element.lake &&
+        !filteredCards.includes(element)
+      ) {
+        filteredCards.push(element);
+      }
+      if (
+        data.showMountains &&
+        element.mountain &&
+        !filteredCards.includes(element)
+      ) {
+        filteredCards.push(element);
+      }
+      if (
+        data.showMuseums &&
+        element.museum &&
+        !filteredCards.includes(element)
+      ) {
+        filteredCards.push(element);
+      }
+      if (
+        data.showViewpoints &&
+        element.viewpoint &&
+        !filteredCards.includes(element)
+      ) {
+        filteredCards.push(element);
+      }
+
+      if (data.onlyFree) {
+        filteredCards = filteredCards.filter(el => el.priceMax == '0.00');
+      } else {
+        filteredCards = filteredCards.filter(el => {
+          let price = parseInt(el.priceMax);
+          return price < data.priceValue;
+        });
+      }
+      if (data.showClosed && !data.showOpened) {
+        filteredCards = filteredCards.filter(el => !el.isOpen);
+      }
+      if (data.showOpened && !data.showClosed) {
+        filteredCards = filteredCards.filter(el => el.isOpen);
+      }
+    });
+    this.cards = filteredCards;
+  }
+
+  /**
+   * This function parses the time to a better looking format
+   */
   generateTime() {
-    this.cards.forEach((card,index) => {
+    this.cards.forEach((card, index) => {
       let hoursFrom, minutesFrom, hoursTo, minutesTo, temp;
       let nowHours = new Date().getHours();
       let nowMinutes = new Date().getMinutes();
 
       temp = card.openingHoursFrom.substr(11);
-      temp = temp.substr(0,5);
+      temp = temp.substr(0, 5);
       this.cards[index].timeFrom = temp;
       temp = card.openingHoursTo.substr(11);
-      temp = temp.substr(0,5);
+      temp = temp.substr(0, 5);
       this.cards[index].timeTo = temp;
 
-      hoursFrom = parseInt(this.cards[index].timeFrom.substr(0,2));
-      minutesFrom = parseInt(this.cards[index].timeFrom.substr(3,4));
-      hoursTo = parseInt(this.cards[index].timeTo.substr(0,2));
-      minutesTo = parseInt(this.cards[index].timeTo.substr(3,4));
+      hoursFrom = parseInt(this.cards[index].timeFrom.substr(0, 2));
+      minutesFrom = parseInt(this.cards[index].timeFrom.substr(3, 4));
+      hoursTo = parseInt(this.cards[index].timeTo.substr(0, 2));
+      minutesTo = parseInt(this.cards[index].timeTo.substr(3, 4));
 
       if (hoursFrom < nowHours && nowHours < hoursTo) {
         this.cards[index].isOpen = true;
       }
-      if (hoursFrom = nowHours) {
+      if ((hoursFrom == nowHours)) {
         if (minutesFrom < nowMinutes) {
           this.cards[index].isOpen = true;
         }
       }
-      if (hoursTo = nowHours) {
+      if ((hoursTo == nowHours)) {
         if (nowMinutes < minutesTo) {
           this.cards[index].isOpen = true;
         }
       }
-    })
+    });
   }
 
-  @ViewChild(SwiperComponent) componentRef: SwiperComponent;
-  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
-
-  ngOnInit() {
-    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    // Add 'implements OnInit' to the class.
-    this.getCards();
-  }
-
+  /**
+   * This function makes an asynchronous http get call to our backend to fetch all cards
+   */
   async getCards() {
-    this.backendService.get('cards')
-      .then((data) => {
+    this.backendService
+      .get('cards')
+      .then(data => {
         const temp: any = data;
         this.cards = temp;
         this.allCards = this.cards;
@@ -135,97 +183,69 @@ export class MainPageComponent implements OnInit{
       .catch(err => console.log(err));
   }
 
-  public config: SwiperConfigInterface = {
-    direction: 'horizontal',
-    slidesPerView: 1,
-    keyboard: true,
-    mousewheel: false,
-    scrollbar: false,
-    navigation: false,
-    pagination: false,
-  };
-
-  private scrollbar: SwiperScrollbarInterface = {
-    el: '.swiper-scrollbar',
-    hide: false,
-    draggable: true
-  };
-
-  private pagination: SwiperPaginationInterface = {
-    el: '.swiper-pagination',
-    clickable: true,
-    hideOnClick: false
-  };
-
-
+  /**
+   * 
+   * @param index The index of the selected day tab
+   * 
+   * Switches between weather tabs and triggers a new backend call to fetch the new weather data
+   */
   public onIndexChange(index: number) {
     this.currentSlide = index;
     this.messageService.onSendCurrentSlide(this.currentSlide);
 
-    this.weatherBalloon(index,  this.longitude, this.latitude);
+    this.getWeather(index);
   }
 
-  goToSlideNumber(slide: number){
+  goToSlideNumber(slide: number) {
     this.index = slide;
     this.onIndexChange(slide);
   }
 
-  getWeekday(currentDay:number, offset:number){
+  getWeekday(currentDay: number, offset: number) {
     return this.days[(currentDay + offset) % 7];
   }
 
+  async getWeather(t: number) {
+    this.backendService
+      .get('weather')
+      .then((data: any) => {
+        let i;
+        let iconName;
 
-  async weatherBalloon(t:number, long:number, lat:number) {
-    let that = this;
-    // fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
-    this.backendService.get('weather')
-    // .then(function(resp) { return resp.json() }) // Convert data to json
-    .then(function(data:any) {
-      var i;
-      var iconName;
-
-      if (t == 0) {
-        i = data.list[0].main.temp;
-        iconName = data.list[0].weather[0].main;
-
-      } else if (t==1) {
-        i = data.list[8].main.temp;
-        iconName = data.list[8].weather[0].main;
-      } else {
-        i = data.list[16].main.temp;
-        iconName = data.list[16].weather[0].main;
-
-      }
-      document.getElementById('temperature').innerHTML=' '+i + '°C';
-      that.setIcon(iconName);
-    })
-    .catch(function() {
-      // catch any errors
-    });
+        if (t == 0) {
+          i = data.list[0].main.temp;
+          iconName = data.list[0].weather[0].main;
+        } else if (t == 1) {
+          i = data.list[8].main.temp;
+          iconName = data.list[8].weather[0].main;
+        } else {
+          i = data.list[16].main.temp;
+          iconName = data.list[16].weather[0].main;
+        }
+        document.getElementById('temperature').innerHTML = ' ' + i + '°C';
+        this.setIcon(iconName);
+      })
+      .catch();
   }
 
-  setIcon(iconName: string){
-    var iconNameFA;
-    if(iconName==='Clear'){
-      iconNameFA='fa-sun'
+  setIcon(iconName: string) {
+    let iconNameFA;
+    if (iconName === "Clear") {
+      iconNameFA = "fa-sun";
+    } else if (iconName === "Snow") {
+      iconNameFA = "fa-snowflake";
+    } else if (iconName === "Rain") {
+      iconNameFA = "fa-cloud-showers-heavy";
+    } else if (iconName === "Clouds") {
+      iconNameFA = "fa-cloud";
+    } else if (iconName === "Thunderstorm") {
+      iconNameFA = "fa-bolt";
     }
-    else if(iconName==='Snow'){
-      iconNameFA='fa-snowflake'
-    }
-    else if(iconName==='Rain'){
-      iconNameFA='fa-cloud-showers-heavy'
-    }
-    else if(iconName==='Clouds'){
-      iconNameFA='fa-cloud';
-    }
-    else if(iconName==='Thunderstorm'){
-      iconNameFA='fa-bolt';
-    }
-    var elem =document.getElementsByClassName('fas')[0];
-    if(elem.classList.length>1){
+    let elem = document.getElementsByClassName("fas")[0];
+    if (elem.classList.length > 1) {
       elem.classList.remove(elem.classList[1]);
     }
-    document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
+    document.getElementsByClassName("fas")[0].classList.add(iconNameFA);
 
     return;
   }

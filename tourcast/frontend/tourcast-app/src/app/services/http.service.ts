@@ -13,6 +13,5 @@ export class BackendService {
 
   public get(url) {
     return this.httpClient.get(this.baseUrl + url).toPromise().catch(err => console.log(err));
-    ;
   }
 }

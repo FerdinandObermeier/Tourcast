@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { BackendService } from '../services/http.service';
 
-
-
-
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent {
 
   sunny = true;
   cloudy = false;
@@ -21,10 +21,6 @@ export class NavBarComponent implements OnInit {
   constructor(private messageService: MessageService, private backendService: BackendService) {
     this.messageService.getHideFilter().subscribe(() => this.showFilter = false);
     this.getWeather();
-    //this.weatherBalloon();
-  }
-
-  ngOnInit() {
   }
 
   async getWeather() {
@@ -37,20 +33,4 @@ export class NavBarComponent implements OnInit {
     }
     this.showWeatherDetail = !this.showWeatherDetail;
   }
-
-  /*weatherBalloon() {
-    var key = '{yourkey}';
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
-    .then(function(resp) { return resp.json() }) // Convert data to json
-    .then(function(data) {
-      console.log(data);
-
-      var act=data.main.temp;
-      document.getElementById('temperature').innerHTML=' '+act + '°C';
-    })
-    .catch(function() {
-      // catch any errors
-    });
-  }*/
-
 }

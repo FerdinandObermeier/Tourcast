@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
+import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { MessageService } from '../services/message.service';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -19,7 +19,7 @@ export class WeatherDetailComponent implements OnInit {
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
-    annotation: "test",
+    annotation: '',
     layout: {
       padding: {
           left: 20,
@@ -34,7 +34,7 @@ export class WeatherDetailComponent implements OnInit {
         labels: {
           title: {
             font: {
-              weight: "bold"
+              weight: 'bold'
             }
           }
         }
@@ -79,7 +79,6 @@ export class WeatherDetailComponent implements OnInit {
 
   ngOnInit() {
     this.setChartData();
-    
   }
 
   setChartData() {
