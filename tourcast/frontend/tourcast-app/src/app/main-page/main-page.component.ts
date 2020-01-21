@@ -184,18 +184,16 @@ export class MainPageComponent implements OnInit{
       var i;
       var iconName;
 
-      if(t==0){
-        i= data.list[0].main.temp;
-        iconName=data.list[0].weather[0].main;
+      if (t == 0) {
+        i = data.list[0].main.temp;
+        iconName = data.list[0].weather[0].main;
 
-      }
-      else if(t==1){
-        i= data.list[7].main.temp;
-        iconName=data.list[7].weather[0].main;
-      }
-      else{
-        i= i= data.list[15].main.temp;
-        iconName=data.list[15].weather[0].main;
+      } else if (t==1) {
+        i = data.list[8].main.temp;
+        iconName = data.list[8].weather[0].main;
+      } else {
+        i = data.list[16].main.temp;
+        iconName = data.list[16].weather[0].main;
 
       }
       document.getElementById('temperature').innerHTML=' '+i + '°C';
