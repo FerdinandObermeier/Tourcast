@@ -20,10 +20,9 @@ export class FilterComponent {
   showOpened = true;
   showClosed = true;
   subscription: Subscription;
+  hideFilter = false;
 
-  constructor(
-    private messageService: MessageService
-  ) {
+  constructor(private messageService: MessageService) {
     this.subscription = this.messageService.getHideFilter().subscribe( data => {
       if (data) {
         if (data.showAttractions && data.showLakes && data.showMountains && data.showMuseums && data.showViewpoints) {
@@ -49,7 +48,8 @@ export class FilterComponent {
 
 
   onHideFilter() {
-    this.messageService.onSendHideFilter();
+    this.hideFilter = true;
+    setTimeout(() => this.messageService.onSendHideFilter(), 400);
   }
 
   onFilter() {

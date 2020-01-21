@@ -1,11 +1,11 @@
 .filter-wrapper{
-  height: 100%;
-  width: 300px;
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
   position: fixed;
   top: 0;
   right: 0;
   color: #a64d79;
-  padding: 10px;
+  padding: 20px;
   z-index: 800;
   background-color: white;
   animation: sidenav 0.4s ease-in-out;
@@ -14,7 +14,7 @@
 
 @keyframes sidenav{
   0%{
-    right: -300px;
+    right: -100vw;
   }
   100%{
     right: 0;
@@ -81,4 +81,25 @@ button{
   background-color: #a64d79;
   color: #eddbe4;
   border-color: #a64d79;
+}
+
+.close{
+  position: absolute;
+  z-index: 600;
+  top: 10px;
+  right: 10px;
+}
+
+.close-animation {
+  animation: closeAnimation 0.4s ease-in-out;
+  right: -100vw;
+}
+
+@keyframes closeAnimation{
+  from {
+    right: 0;
+  }
+  to {
+    right: -100vw;
+  }
 }

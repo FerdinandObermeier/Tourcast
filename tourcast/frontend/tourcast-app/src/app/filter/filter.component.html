@@ -1,4 +1,4 @@
-<div class="filter-wrapper">
+<div class="filter-wrapper" [ngClass]="{'close-animation': hideFilter}" >
   <div class="title">FILTER ATTRACTIONS</div>
   <div class="filter-group">
     <div class="filter-title">Type of Attraction</div>
@@ -44,5 +44,8 @@
   <div class="filter-group">
     <button (click)="onHideFilter()">Cancel</button>
     <button (click)="onFilter()" class="filter">Filter</button>
+  </div>
+  <div class="close" (click)="onHideFilter()">
+    <mat-icon aria-hidden="false" aria-label="keyboardArrowRight">close</mat-icon>
   </div>
 </div>
