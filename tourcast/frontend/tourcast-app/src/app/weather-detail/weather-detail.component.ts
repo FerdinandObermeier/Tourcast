@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions, Chart } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 import { MessageService } from '../services/message.service';
-// import ChartDataLabels from 'chartjs-plugin-datalabels';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-weather-detail',
@@ -28,23 +28,35 @@ export class WeatherDetailComponent implements OnInit {
           bottom: 20
       }
     },
-    animation: {
-      onComplete: function() {
-        var chartInstance = this.chart, ctx = chartInstance.ctx;
-            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'bottom';
-            ctx.fillStyle = 'rgb(84, 84, 84)';
-            ctx.fontWeight = 'bold';
-
-            this.data.datasets.forEach(function (dataset, i) {
-                var meta = chartInstance.controller.getDatasetMeta(i);
-                meta.data.forEach(function (bar, index) {
-                    var data = dataset.data[index];
-                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
-                });
-            });
+    plugins: {
+      datalabels: {
+        align: 'top',
+        labels: {
+          title: {
+            font: {
+              weight: "bold"
+            }
+          }
+        }
       }
+    },
+    animation: {
+      // onComplete: function() {
+      //   var chartInstance = this.chart, ctx = chartInstance.ctx;
+      //       ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+      //       ctx.textAlign = 'center';
+      //       ctx.textBaseline = 'bottom';
+      //       ctx.fillStyle = 'rgb(84, 84, 84)';
+      //       ctx.fontWeight = 'bold';
+
+      //       this.data.datasets.forEach(function (dataset, i) {
+      //           var meta = chartInstance.controller.getDatasetMeta(i);
+      //           meta.data.forEach(function (bar, index) {
+      //               var data = dataset.data[index];
+      //               ctx.fillText(data, bar._model.x, bar._model.y - 5);
+      //           });
+      //       });
+      // }
     }
   };
   public lineChartColors: Color[] = [
@@ -55,7 +67,7 @@ export class WeatherDetailComponent implements OnInit {
   ];
   public lineChartLegend = false;
   public lineChartType = 'line';
-  public lineChartPlugins = [];
+  public lineChartPlugins = [ChartDataLabels];
 
 
   currentSlide = 0;
