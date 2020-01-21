@@ -9,8 +9,8 @@ import { MessageService } from '../services/message.service';
 export class DetailViewComponent implements OnInit {
 
   showDetails = false;
+  closeDetail = false;
   cardInfo;
-
   priceTag: any;
   openingTime: any;
   rating: any;
@@ -21,6 +21,7 @@ export class DetailViewComponent implements OnInit {
       this.cardInfo = data.cardInfo;
       this.onCalculateInformation();
       this.showDetails = true;
+      this.closeDetail = false;
     });
 
     this.currentTime = new Date().getHours();
@@ -44,7 +45,8 @@ export class DetailViewComponent implements OnInit {
   }
 
   onClose() {
-    this.showDetails = false;
+    this.closeDetail = true;
+    setTimeout(() => this.showDetails = true, 200);
   }
 
   onOpenLink(link: string) {
