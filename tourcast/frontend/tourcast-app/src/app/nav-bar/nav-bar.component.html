@@ -1,22 +1,16 @@
 
 <div class="navbar">
-   <div></div>
-    <div class="degree">
-    
-            <i class="fas "></i>	
-        
-               
-               
-        
-        
-       <span id="temperature">
-        
-        </span>
-    </div>
-    <div class="filter">
-        
-        <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="showFilter=!showFilter">filter_list
-        </mat-icon>
-    </div>
+  <div></div>
+  <div class="degree" (click)="onToggleWeatherDetail()">
+    <i class="fas "></i>
+    <span id="temperature"></span>
+  </div>
+  <div class="filter">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" (click)="showFilter=!showFilter">filter_list
+    </mat-icon>
+  </div>
 </div>
 <app-filter *ngIf="showFilter"></app-filter>
+<app-weather-detail *ngIf="showWeatherDetail" [weatherData]="weatherData"></app-weather-detail>
+<mat-icon id="weatherDetail" [ngClass]="{'rotate': showWeatherDetail}" 
+(click)="onToggleWeatherDetail()">keyboard_arrow_up</mat-icon>

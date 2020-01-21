@@ -10,13 +10,9 @@ export class BackendService {
      }
 
     baseUrl = 'https://tourcast-backend.herokuapp.com/';
-    cardsUrl = 'cards';
-    url = 'https://jsonplaceholder.typicode.com';
 
-    cards: any;
-
-  public getCards() {
-    return this.httpClient.get(this.baseUrl + this.cardsUrl);
+  public get(url) {
+    return this.httpClient.get(this.baseUrl + url).toPromise().catch(err => console.log(err));
+    ;
   }
-
 }

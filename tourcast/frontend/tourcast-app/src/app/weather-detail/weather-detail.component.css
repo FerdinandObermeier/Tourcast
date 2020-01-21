@@ -1,0 +1,44 @@
+.weather-container{
+  position: fixed;
+  z-index: 550;
+  background-color: white;
+  top: 60px;
+  left: 0;
+  border-top: 2px solid #a64d79;
+  border-bottom: 2px solid #a64d79;
+  width: 100vw;
+  height: auto;
+  animation: top 0.3s ease-in-out;
+}
+
+@keyframes top {
+  from {
+    top: -400px;
+  }
+  to {
+    top: 60px;
+  }
+}
+
+.chart-container{
+  width: 100vw;
+  height: 100vw;
+  margin: auto;
+}
+
+.icons-container {
+  display: flex;
+  flex-wrap: nowrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  width: 94%;
+  margin-left: 6%;
+  margin-bottom: 10px;
+}
+
+.icons-container div{
+  flex: 1 1 auto;
+  text-align: center;
+  color: #a64d79;
+}

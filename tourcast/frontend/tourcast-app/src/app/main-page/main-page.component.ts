@@ -1,17 +1,15 @@
-import { Component, AfterViewInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { SwiperConfigInterface, SwiperScrollbarInterface, SwiperPaginationInterface, SwiperComponent, SwiperDirective } from 'ngx-swiper-wrapper';
-import {HttpClient} from '@angular/common/http';
-import { async } from 'q';
 import { BackendService } from '../services/http.service';
-import { TestBed } from '@angular/core/testing';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent {
-  
+export class MainPageComponent implements OnInit{
+
   currentSlide: number = 0;
   public disabled: boolean = false;
   index = 0;
@@ -22,52 +20,121 @@ export class MainPageComponent {
   ipAddress;
   latitude;
   longitude;
+  loading;
 
 
-  cards:any; 
+  allCards;
+  cards:any;
 
-  
+
   constructor(
     private backendService: BackendService,
-    private http: HttpClient
+    private messageService: MessageService
   ) {
+    this.loading = true;
+
+    this.messageService.getHideFilter().subscribe( (data:any) => {
+      if(data) {
+        this.cards = this.allCards;
+        let filteredCards = [];
+        this.cards.filter(element => {
+          if (data.showAttractions && element.attraction) {
+            filteredCards.push(element);
+          }
+          if (data.showLakes && element.lake && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+          if (data.showMountains && element.mountain && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+          if (data.showMuseums && element.museum && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+          if (data.showViewpoints && element.viewpoint && !filteredCards.includes(element)) {
+            filteredCards.push(element);
+          }
+
+          if (data.onlyFree) {
+            filteredCards = filteredCards.filter(el => el.priceMax == "0.00")
+          } else {
+            filteredCards = filteredCards.filter(el => {
+              let price = parseInt(el.priceMax);
+              return price < data.priceValue;
+            });
+          }
+          if (data.showClosed && !data.showOpened) {
+            filteredCards = filteredCards.filter(el => !el.isOpen);
+          }
+          if (data.showOpened && !data.showClosed) {
+            filteredCards = filteredCards.filter(el => el.isOpen);
+          }
+        });
+        this.cards = filteredCards;
+      }
+    })
+
     this.currentDay = this.today.getDay();
     this.uebermorgen = this.getWeekday(this.currentDay, 2);
-     // comment out to disable weather API calls
-    /*this.http.get<{ip:string}>('https://jsonip.com')
-    .subscribe( (data) => {
-      
-      console.log('th data', data);
-      this.ipAddress = data.ip;
-      this.http.get('https://api.ipstack.com/'+this.ipAddress+'?access_key=d05d3cc8c31a96eeb4b9e90881d94ec4')
-      .subscribe( (data: any)=>{
-        console.log(data);
-        this.latitude = data.latitude;
-        this.longitude= data.longitude;
-       
-      }); 
-      
-    });*/
-    weatherBalloon(this.index, this.longitude, this.latitude);
+
+    this.weatherBalloon(this.index, this.longitude, this.latitude);
   }
-  
+
+
+  generateTime() {
+    this.cards.forEach((card,index) => {
+      let hoursFrom, minutesFrom, hoursTo, minutesTo, temp;
+      let nowHours = new Date().getHours();
+      let nowMinutes = new Date().getMinutes();
+
+      temp = card.openingHoursFrom.substr(11);
+      temp = temp.substr(0,5);
+      this.cards[index].timeFrom = temp;
+      temp = card.openingHoursTo.substr(11);
+      temp = temp.substr(0,5);
+      this.cards[index].timeTo = temp;
+
+      hoursFrom = parseInt(this.cards[index].timeFrom.substr(0,2));
+      minutesFrom = parseInt(this.cards[index].timeFrom.substr(3,4));
+      hoursTo = parseInt(this.cards[index].timeTo.substr(0,2));
+      minutesTo = parseInt(this.cards[index].timeTo.substr(3,4));
+
+      if (hoursFrom < nowHours && nowHours < hoursTo) {
+        this.cards[index].isOpen = true;
+      }
+      if (hoursFrom = nowHours) {
+        if (minutesFrom < nowMinutes) {
+          this.cards[index].isOpen = true;
+        }
+      }
+      if (hoursTo = nowHours) {
+        if (nowMinutes < minutesTo) {
+          this.cards[index].isOpen = true;
+        }
+      }
+    })
+  }
+
   @ViewChild(SwiperComponent) componentRef: SwiperComponent;
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
 
   ngOnInit() {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.backendService.getCards().subscribe((data) => {
-      let temp: any = data;
-      this.cards = temp.slice(0,9);
-    });
+    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    // Add 'implements OnInit' to the class.
+    this.getCards();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
+  async getCards() {
+    this.backendService.get('cards')
+      .then((data) => {
+        const temp: any = data;
+        this.cards = temp;
+        this.allCards = this.cards;
+        this.generateTime();
+        this.loading = false;
+      })
+      .catch(err => console.log(err));
   }
-  
+
   public config: SwiperConfigInterface = {
     direction: 'horizontal',
     slidesPerView: 1,
@@ -93,8 +160,9 @@ export class MainPageComponent {
 
   public onIndexChange(index: number) {
     this.currentSlide = index;
-    
-    weatherBalloon(index,  this.longitude, this.latitude);
+    this.messageService.onSendCurrentSlide(this.currentSlide);
+
+    this.weatherBalloon(index,  this.longitude, this.latitude);
   }
 
   goToSlideNumber(slide: number){
@@ -106,62 +174,38 @@ export class MainPageComponent {
     return this.days[(currentDay + offset) % 7];
   }
 
-  
-  /*weatherBalloon() {
-    var key = '{yourkey}';
-    var t = this.index;
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + 'Munich,de'+ '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
-    .then(function(resp) { return resp.json() }) // Convert data to json
-    .then(function(data) {
-      console.log(data);
-      var act=0;
-      if(t==0){
-        act=data.main.temp;
+
+  async weatherBalloon(t:number, long:number, lat:number) {
+    let that = this;
+    // fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')
+    this.backendService.get('weather')
+    // .then(function(resp) { return resp.json() }) // Convert data to json
+    .then(function(data:any) {
+      var i;
+      var iconName;
+
+      if (t == 0) {
+        i = data.list[0].main.temp;
+        iconName = data.list[0].weather[0].main;
+
+      } else if (t==1) {
+        i = data.list[8].main.temp;
+        iconName = data.list[8].weather[0].main;
+      } else {
+        i = data.list[16].main.temp;
+        iconName = data.list[16].weather[0].main;
+
       }
-      else if(t==1){
-        act=1;
-      }
-      document.getElementById('temperature').innerHTML=' '+act + '°C';
+      document.getElementById('temperature').innerHTML=' '+i + '°C';
+      that.setIcon(iconName);
     })
     .catch(function() {
       // catch any errors
     });
-  }+ lat+ '&lon='+long+
-*/
-}
+  }
 
-
-function weatherBalloon(t:number, long:number, lat:number) { 
-  fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + 'Munich,de'+  '&appid=' + 'af1875e8d01249f1e639f3e308a0a892'+'&units=metric')  
-  .then(function(resp) { return resp.json() }) // Convert data to json
-  .then(function(data) {
-    var i;
-    var iconName;
-    
-    if(t==0){
-      i= data.list[0].main.temp;
-      iconName=data.list[0].weather[0].main;
-
-    }
-    else if(t==1){
-      i= data.list[7].main.temp;
-      iconName=data.list[7].weather[0].main;
-    }
-    else{
-      i= i= data.list[15].main.temp;
-      iconName=data.list[15].weather[0].main;
-      
-    }
-    document.getElementById('temperature').innerHTML=' '+i + '°C';
-    setIcon(iconName);
-  })
-  .catch(function() {
-    // catch any errors
-  });
-}
-
- function setIcon(iconName: String){
-   var iconNameFA;
+  setIcon(iconName: string){
+    var iconNameFA;
     if(iconName==='Clear'){
       iconNameFA='fa-sun'
     }
@@ -182,8 +226,7 @@ function weatherBalloon(t:number, long:number, lat:number) {
       elem.classList.remove(elem.classList[1]);
     }
     document.getElementsByClassName('fas')[0].classList.add(iconNameFA);
-    
+
     return;
   }
- 
- 
+}

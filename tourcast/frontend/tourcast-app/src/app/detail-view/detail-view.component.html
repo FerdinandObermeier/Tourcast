@@ -1,62 +1,133 @@
-<div class="detail-card">
-    <div class="card-wrapper">
+<div class="detail-card" *ngIf="showDetails">
+    <!-- <div class="image-container"> -->
+      <!-- </div> -->
+      <div class="card-wrapper">
+        <img src={{cardInfo.img}} alt="">
+        <div class="filter"></div>
         <div class="icon" (click)="onClose()">
             <mat-icon aria-hidden="false" aria-label="Attractions">close</mat-icon>
         </div>
-        <div class="image-container">
-            <img src={{cardInfo.img}} alt="">
-        </div>
         <div class="text-container">
-            <div class="title">
-                <b>{{ cardInfo.name }}</b>
-            </div>
-            <div class="rating">
-            <mat-icon *ngIf="rating > 0" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon *ngIf="rating > 1" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon *ngIf="rating > 2" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon *ngIf="rating > 3" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon *ngIf="rating > 4" aria-hidden="false" aria-label="Attractions">star</mat-icon>
-            <mat-icon *ngIf="rating < 1" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-            <mat-icon *ngIf="rating < 2" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-            <mat-icon *ngIf="rating < 3" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-            <mat-icon *ngIf="rating < 4" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-            <mat-icon *ngIf="rating < 5" aria-hidden="false" aria-label="Attractions">star_border</mat-icon>
-            </div>
-            <hr>
-            <div class="info">
-                <div class="info-item">
-                    <div>
-                        <mat-icon aria-hidden="false" aria-label="Attractions">money</mat-icon>
-                    </div>
-                    <div>
-                        {{ priceTag }}
-                    </div>
+          <div class="title">
+              <b>{{ cardInfo.name }}</b>
+          </div>
+          <div class="rating">
+          <mat-icon *ngIf="rating > 0" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 1" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 2" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 3" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating > 4" aria-hidden="false" aria-label="star">star</mat-icon>
+          <mat-icon *ngIf="rating < 1" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 2" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 3" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 4" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          <mat-icon *ngIf="rating < 5" aria-hidden="false" aria-label="emptyStar">star_border</mat-icon>
+          </div>
+          <mat-tab-group>
+            <mat-tab label="General Information">
+              <div class="info">
+                  <div class="info-item">
+                      <div>
+                          <mat-icon aria-hidden="false" aria-label="money">money</mat-icon>
+                      </div>
+                      <div>
+                        <div><b>Pricing</b></div>
+                        <div>
+                          {{ priceTag }}
+                        </div>
+                      </div>
+                  </div>
+                  <div class="info-item" (click)="onOpenLink(cardInfo.mapsURL)">
+                      <div>
+                          <mat-icon aria-hidden="false" aria-label="directions">directions</mat-icon>
+                      </div>
+                      <div>
+                        <div><b>Navigation</b></div>
+                        <div>Open in Google Maps</div>
+                      </div>
+                  </div>
+                  <div class="info-item">
+                      <div>
+                          <mat-icon aria-hidden="false" aria-label="accessTime">access_time</mat-icon>
+                      </div>
+                      <div>
+                        <div><b>Opening Hours</b></div>
+                        <div>
+                          {{ openingTime }}
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="crowdedness">
+                <div>
+                  <mat-icon aria-hidden="false" aria-label="group">group</mat-icon>
                 </div>
-                <div class="info-item" (click)="onOpenLink('https://www.google.com/maps/search/?api=1&query=Schloss+Neuschwanstein')">
-                    <div>
-                        <mat-icon aria-hidden="false" aria-label="Attractions">directions</mat-icon>
-                    </div>
-                    <div>
-                        Google Maps
-                    </div>
+                <div class="chart">
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 0 && currentTime < 2) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">0-2</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 2 && currentTime < 4) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">2-4</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 4 && currentTime < 6) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">4-6</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 6 && currentTime < 8) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">6-8</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 8 && currentTime < 10) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">8-10</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 10 && currentTime < 12) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">10-12</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 12 && currentTime < 14) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">12-14</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 14 && currentTime < 16) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">14-16</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 16 && currentTime < 18) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">16-18</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 18 && currentTime < 20) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">18-20</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 20 && currentTime < 22) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">20-22</div>
+                  </div>
+                  <div class="chart-item">
+                    <div class="chart-bar" [ngStyle]="{'background-color': (currentTime >= 22 && currentTime <= 24) ? '#a64d79' : '#eddbe4'}"></div>
+                    <div class="chart-time">22-24</div>
+                  </div>
+                  
                 </div>
-                <div class="info-item">
-                    <div>
-                        <mat-icon aria-hidden="false" aria-label="Attractions">access_time</mat-icon>
-                    </div>
-                    <div>
-                        {{ openingTime }}
-                    </div>
-                </div>
-            </div>
-            <div class="descriptionContainer">
+              </div>
+            </mat-tab>
+            <mat-tab label="Description">
+              <div class="description-container">
                 <div class="description">
-                     {{ cardInfo.description }}
+                      {{ cardInfo.description }}
                 </div>
-            </div>
-            <div class="buttons">
-                <button mat-raised-button color="primary">I will go there!</button>
-            </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <div class="button-container">
+          <div class="button-center">
+            <button>I will go there!</button>
+          </div>
         </div>
     </div>
 </div>

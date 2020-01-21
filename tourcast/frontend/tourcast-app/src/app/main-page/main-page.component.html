@@ -12,23 +12,42 @@
         <swiper class="swiper-container" [config]="config" [(index)]="index" (indexChange)="onIndexChange($event)">
           <div class="swiper-slide">
             <div class="card-container">
+              <div class="spinner-container" *ngIf="loading">
+                <mat-spinner color="black"></mat-spinner>
+              </div>
+              <div class="no-cards" *ngIf="cards === undefined || cards.length===0" >
+                <img src="../../assets/weather_woman.svg">
+                <div class="no-cards-text">There are no attractions to show.</div>
+              </div>
               <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
             </div>
           </div>
           <div class="swiper-slide">
             <div class="card-container">
-                <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
+              <div class="spinner-container" *ngIf="loading">
+                <mat-spinner color="black"></mat-spinner>
               </div>
+              <div class="no-cards" *ngIf="cards === undefined || cards.length===0" >
+                <img src="../../assets/weather_woman.svg">
+                <div class="no-cards-text">There are no attractions to show.</div>
+              </div>
+              <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
+            </div>
             </div>
             <div class="swiper-slide">
               <div class="card-container">
-                  <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
+                <div class="spinner-container" *ngIf="loading">
+                  <mat-spinner color="black"></mat-spinner>
+                </div>
+                <div class="no-cards" *ngIf="cards === undefined || cards.length===0" >
+                  <img src="../../assets/weather_woman.svg">
+                  <div class="no-cards-text">There are no attractions to show.</div>
+                </div>
+                <app-card *ngFor="let card of cards" [cardInfo]="card"></app-card>
             </div>
           </div>
         </swiper>
       </div>
-
-
-
 </div>
-
+<mat-slider></mat-slider>
+<app-detail-view></app-detail-view>
