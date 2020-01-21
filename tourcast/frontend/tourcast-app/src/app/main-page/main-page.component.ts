@@ -151,6 +151,11 @@ export class MainPageComponent implements OnInit {
       hoursTo = parseInt(this.cards[index].timeTo.substr(0, 2));
       minutesTo = parseInt(this.cards[index].timeTo.substr(3, 4));
 
+      if (hoursTo == '00' && minutesTo == '00') {
+        hoursTo = '23';
+        minutesTo = '59';
+      }
+
       if (hoursFrom < nowHours && nowHours < hoursTo) {
         this.cards[index].isOpen = true;
       }
