@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Filters } from '../filters.enum';
+import { Component, OnDestroy } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { Subscription } from 'rxjs';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
-export class FilterComponent {
+export class FilterComponent implements OnDestroy {
 
   showAttractions = false;
   showLakes = false;
@@ -43,15 +45,21 @@ export class FilterComponent {
         this.showOpened = data.showOpened;
         this.showClosed = data.showClosed;
       }
-    })
+    });
   }
 
 
+  /**
+   * Sets a css class via ngStyle (compare HTML) and sends a message to hide the filter
+   */
   onHideFilter() {
     this.hideFilter = true;
     setTimeout(() => this.messageService.onSendHideFilter(), 400);
   }
 
+  /**
+   * Sets the chosen filter values and sends the data to filter the shown attractions
+   */
   onFilter() {
         if (!this.showAttractions && !this.showLakes && !this.showMountains && !this.showMuseums && !this.showViewpoints) {
           this.showAttractions = true;
@@ -60,7 +68,7 @@ export class FilterComponent {
           this.showMuseums = true;
           this.showViewpoints = true;
         }
-        let data = {
+        const data = {
           showAttractions: this.showAttractions,
           showLakes: this.showLakes,
           showMountains: this.showMountains,
@@ -74,9 +82,10 @@ export class FilterComponent {
         this.messageService.onSendHideFilter(data);
   }
 
+  /**
+   * Unsubscribes from services to avoid data leaks
+   */
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
   }
 }

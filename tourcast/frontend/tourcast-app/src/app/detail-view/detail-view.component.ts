@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessageService } from '../services/message.service';
 
+/**
+ * @ignore
+ */
 @Component({
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
   styleUrls: ['./detail-view.component.css']
 })
-export class DetailViewComponent implements OnInit {
+export class DetailViewComponent {
 
   showDetails = false;
   cardInfo;
-
   priceTag: any;
   openingTime: any;
   rating: any;
@@ -26,9 +28,9 @@ export class DetailViewComponent implements OnInit {
     this.currentTime = new Date().getHours();
   }
 
-  ngOnInit() {
-  }
-
+  /**
+   * Parses card information into priceTag, openingTime and rating
+   */
   onCalculateInformation() {
     if (this.cardInfo.priceMax == '0.00') {
       this.priceTag = 'Free Entrance';
