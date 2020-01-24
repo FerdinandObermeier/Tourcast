@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from '../services/message.service';
+import { BackendService } from '../services/http.service';
 
 /**
  * @ignore
@@ -19,7 +20,7 @@ export class DetailViewComponent {
   rating: any;
   currentTime;
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private backendService: BackendService) {
     this.messageService.getShowDetails().subscribe((data: any) => {
       this.cardInfo = data.cardInfo;
       this.onCalculateInformation();
@@ -50,6 +51,14 @@ export class DetailViewComponent {
   onClose() {
     this.closeDetail = true;
     setTimeout(() => this.showDetails = true, 200);
+  }
+
+  onGoThere() {
+    const formData = this.cardInfo;
+    if (this.currentTime >= 0 && this.currentTime < 2) {
+      formData.crowdedness0 = formData.crowdedness0 + 1;
+    }
+    this.backendService.post('cards/', this.cardInfo);
   }
 
   onOpenLink(link: string) {
