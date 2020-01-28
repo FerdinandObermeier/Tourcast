@@ -32,8 +32,6 @@ export class DetailViewComponent {
       + parseInt(this.cardInfo.crowdedness8) + parseInt(this.cardInfo.crowdedness10) + parseInt(this.cardInfo.crowdedness12) + parseInt(this.cardInfo.crowdedness14) + parseInt(this.cardInfo.crowdedness16)
       + parseInt(this.cardInfo.crowdedness18) + parseInt(this.cardInfo.crowdedness20) + parseInt(this.cardInfo.crowdedness22);
      this.numberOfVisitors = this.numberOfVisitors !== 0 ? this.numberOfVisitors : 1;
-     console.log(this.numberOfVisitors);
-     console.log(this.cardInfo);
     });
 
     this.currentTime = new Date().getHours();
