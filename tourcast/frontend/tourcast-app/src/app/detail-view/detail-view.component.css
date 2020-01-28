@@ -7,7 +7,7 @@
   top: 0;
   z-index: 600;
   box-shadow: 0 0 10px 0 #888;
-  animation: popup 0.2s;
+  animation: popup 0.2s ease-in-out;
   transition: ease-out;
   border-radius: 15px 15px 0 0;
   color: white;
@@ -85,11 +85,10 @@ img{
     display: grid;
     grid-template-columns: 20% 80%;
     text-align: center;
-    vertical-align:center;
     border-radius: 10px;
     margin: 5px;
     color: black;
-    background-color: white;
+    background-color: #eddbe4;
     font-size: 0.8em;
 }
 
@@ -157,6 +156,11 @@ button{
   height: 16px;
 }
 
+.crowdedness{
+  overflow: auto;
+  height: 130px;
+}
+
 .chart{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -164,20 +168,35 @@ button{
 
 .chart-bar{
   width: 29px;
-  height: 90px;
-  margin:auto;
   border-radius: 5px 5px 0 0;
   background-color: rgb(237,219,228);
+  transition: height 0.2s ease-in-out;
 }
 
 .chart-item{
   display: grid;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 1fr 1fr;
   text-align: center;
   font-size: 0.8em;
+  padding: 1px;
+  align-items: end;
 }
 
 .chart-time{
   padding: 10px 0;
   font-size: 0.8em;
+}
+
+.close-detail{
+  animation: closeDetail 0.2s ease-in-out;
+  top: 100vh;
+}
+
+@keyframes closeDetail{
+  from {
+    top: 0;
+  }
+  to {
+    top: 100vh;
+  }
 }
