@@ -158,6 +158,7 @@ button{
 
 .crowdedness{
   overflow: auto;
+  height: 130px;
 }
 
 .chart{
@@ -167,18 +168,18 @@ button{
 
 .chart-bar{
   width: 29px;
-  height: 90px;
-  margin:auto;
   border-radius: 5px 5px 0 0;
   background-color: rgb(237,219,228);
+  transition: height 0.2s ease-in-out;
 }
 
 .chart-item{
   display: grid;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 1fr 1fr;
   text-align: center;
   font-size: 0.8em;
   padding: 1px;
+  align-items: end;
 }
 
 .chart-time{
