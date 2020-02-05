@@ -15,7 +15,7 @@ export class BackendService {
     return this.httpClient.get(this.baseUrl + url).toPromise().catch(err => console.log(err));
   }
 
-  public post(url, id, key, value) {
+  public patch(url, id, key, value) {
     const formData = new FormData();
     formData.set(key, value);
     console.log(formData);
