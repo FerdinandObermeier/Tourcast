@@ -126,7 +126,7 @@ export class DetailViewComponent {
         key = 'crowdedness22';
         value = this.cardInfo.crowdedness22;
       }
-      this.backendService.post('cards/', this.cardInfo.id, key, value);
+      this.backendService.patch('cards/', this.cardInfo.id, key, value);
     }
   }
 
