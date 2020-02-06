@@ -9,7 +9,8 @@ export class BackendService {
     constructor(private httpClient: HttpClient) {
      }
 
-    baseUrl = 'https://tourcast-backend.herokuapp.com/';
+    // baseUrl = 'https://tourcast-backend.herokuapp.com/';
+    baseUrl = 'http://localhost:8000/';
 
   public get(url) {
     return this.httpClient.get(this.baseUrl + url).toPromise().catch(err => console.log(err));
